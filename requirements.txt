@@ -1,0 +1,5 @@
+Pyside6
+PyQt6
+fpdf
+pandas
+openpyxl
