@@ -1,3 +1,4 @@
+import ctypes
 from PySide6.QtWidgets import QMessageBox, QLineEdit, QListView, QVBoxLayout, QWidget, QMenu
 from PySide6.QtCore import QDate, QStringListModel
 import sys
@@ -95,6 +96,12 @@ class StudentPayePage(Ui_Dialog):
         annee = self.paye_annee_comboBox.currentText()
 
         # Appeler la fonction pour sauvegarder les données dans la base de données
-        save_payement_to_db(matricule, raison, montant, date, annee)
+        # save_payement_to_db(matricule, raison, montant, date, annee)
+        # Appeler la fonction pour sauvegarder les données dans la base de données
+        message = save_payement_to_db(matricule, raison, montant, date, annee)
+    
+        # Afficher un message à l'utilisateur
+        ctypes.windll.user32.MessageBoxW(0, message, "Résultat de l'enregistrement", 0x40 | 0x1)
+
         # Fermer la boîte de dialogue après l'enregistrement
         self.accept()

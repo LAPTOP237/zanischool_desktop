@@ -50,6 +50,22 @@ class StudentPage(Ui_StudentDialog):
         msg.exec()
 
 
+    # def save_student(self):
+    #     # Récupérer les données du formulaire
+    #     nom = self.name_lineEdit.text()
+    #     prenom = self.name_lineEdit_2.text()
+    #     sexe = self.gender_comboBox.currentText()
+    #     option_et_niveau = self.class_comboBox_2.currentText()
+    #     date_naissance = self.dateNaiss_dateEdit.date().toString('yyyy-MM-dd')
+    #     lieu_naissance = self.lieuNaiss_lineEdit.text()
+    #     email = self.email_lineEdit.text()
+    #     contact = self.contact_lineEdit.text()
+
+    #     # Appeler la fonction pour sauvegarder les données dans la base de données
+    #     save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact)
+
+    #     # Fermer la boîte de dialogue après l'enregistrement
+    #     self.accept()
     def save_student(self):
         # Récupérer les données du formulaire
         nom = self.name_lineEdit.text()
@@ -62,7 +78,13 @@ class StudentPage(Ui_StudentDialog):
         contact = self.contact_lineEdit.text()
 
         # Appeler la fonction pour sauvegarder les données dans la base de données
-        save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact)
+        success, result = save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact)
 
-        # Fermer la boîte de dialogue après l'enregistrement
-        self.accept()
+        if success:
+            # Afficher un message de succès avec le nom et le matricule
+            QMessageBox.information(self, "Succès", f"L'apprenant {nom} {prenom} a été enregistré avec succès. Le matricule généré est {result}. Veuillez vous rendre à la page 'Paiements Apprenants' pour enregistrer ses paiements et générer automatiquement les reçus.")
+            self.accept()  # Fermer la boîte de dialogue après l'enregistrement réussi
+        else:
+            # Afficher un message d'erreur avec les détails de l'erreur
+            QMessageBox.critical(self, "Erreur", f"Une erreur s'est produite lors de l'enregistrement de l'apprenant : {result}. Veuillez réessayer ou contacter le service client.")
+

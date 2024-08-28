@@ -3,6 +3,9 @@ from datetime import datetime
 from data.exportManager import generer_pdf_recu
 from data.recu_paye_student import generate_receipt_pdf
 
+import os
+import ctypes
+
 def get_connection():
     """Retourne une connexion à la base de données."""
     return sqlite3.connect('data/zani_db.db')
@@ -133,19 +136,41 @@ def update_student(matricule, nom, prenom, sexe, option_et_niveau, date_naissanc
     conn.close()
 
 
+# def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
+#     matricule = generate_matricule(sexe)
+    
+#     conn = sqlite3.connect('data/zani_db.db')
+#     cursor = conn.cursor()
+    
+#     cursor.execute('''
+#         INSERT INTO students (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, created_at, last_update)
+#         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+#     ''', (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact))
+    
+#     conn.commit()
+#     conn.close()
+
+
 def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
     matricule = generate_matricule(sexe)
     
-    conn = sqlite3.connect('data/zani_db.db')
-    cursor = conn.cursor()
-    
-    cursor.execute('''
-        INSERT INTO students (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, created_at, last_update)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
-    ''', (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact))
-    
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect('data/zani_db.db')
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO students (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, created_at, last_update)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+        ''', (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact))
+        
+        conn.commit()
+        conn.close()
+
+        return True, matricule  # Retourner True et le matricule généré si l'insertion est un succès
+    except Exception as e:
+        print(f"Erreur lors de l'enregistrement de l'apprenant: {e}")
+        return False, str(e)  # Retourner False et le message d'erreur si une exception se produit
+
 
 def get_student_by_matricule(matricule):
     """Récupère les données d'un étudiant à partir de son matricule."""
@@ -230,104 +255,205 @@ def get_etude_id_by_matricule(matricule):
     
 
 #Enregistrer le paiment d'un etudiant dans la bd
-def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
+# def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
     
-    conn = sqlite3.connect('data/zani_db.db')
-    cursor = conn.cursor()
+#     conn = sqlite3.connect('data/zani_db.db')
+#     cursor = conn.cursor()
 
-    datedeb, datefin = parse_annee_scolaire(annee_scolaire)
+#     datedeb, datefin = parse_annee_scolaire(annee_scolaire)
 
-     # Vérifier si l'année scolaire existe déjà, sinon la créer
-    cursor.execute("""
-        SELECT id_scolarite FROM annee_scolaire 
-        WHERE debut = ? AND fin = ?
-    """, (datedeb, datefin))
-    annee_scolarite1 = cursor.fetchone()
+#      # Vérifier si l'année scolaire existe déjà, sinon la créer
+#     cursor.execute("""
+#         SELECT id_scolarite FROM annee_scolaire 
+#         WHERE debut = ? AND fin = ?
+#     """, (datedeb, datefin))
+#     annee_scolarite1 = cursor.fetchone()
     
-    if annee_scolarite1 is None:
-        cursor.execute("""
-            INSERT INTO annee_scolaire (debut, fin)
-            VALUES (?, ?)
-        """, (datedeb, datefin))
-        annee_scolarite_id = cursor.lastrowid
-    else:
-        annee_scolarite_id = annee_scolarite1[0]
+#     if annee_scolarite1 is None:
+#         cursor.execute("""
+#             INSERT INTO annee_scolaire (debut, fin)
+#             VALUES (?, ?)
+#         """, (datedeb, datefin))
+#         annee_scolarite_id = cursor.lastrowid
+#     else:
+#         annee_scolarite_id = annee_scolarite1[0]
    
-   # Remplacer la virgule par un point pour les conversions
-    montant_verse = montant_verse.replace(',', '.')
+#    # Remplacer la virgule par un point pour les conversions
+#     montant_verse = montant_verse.replace(',', '.')
     
-    try:
-        montant_verse = float(montant_verse)
-    except ValueError:
-        print("Erreur de conversion pour le montant versé.")
-        return
+#     try:
+#         montant_verse = float(montant_verse)
+#     except ValueError:
+#         print("Erreur de conversion pour le montant versé.")
+#         return
     
-   # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
-    cursor.execute("""
-        SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
-        FROM dossier d
-        JOIN students s ON d.id_eleve = s.matricule
-        JOIN etude e ON d.id_etude = e.id_etude
-        LEFT JOIN recu r ON d.id_dossier = r.id_dossier
-        WHERE s.matricule = ? AND d.id_scolarite = ?
-    """, (matricule, annee_scolarite_id))
+#    # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
+#     cursor.execute("""
+#         SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
+#         FROM dossier d
+#         JOIN students s ON d.id_eleve = s.matricule
+#         JOIN etude e ON d.id_etude = e.id_etude
+#         LEFT JOIN recu r ON d.id_dossier = r.id_dossier
+#         WHERE s.matricule = ? AND d.id_scolarite = ?
+#     """, (matricule, annee_scolarite_id))
     
-    result = cursor.fetchone()
+#     result = cursor.fetchone()
     
-    if not result:
-        print("Dossier non trouvé.")
-         # Créer le nouveau dossier
-        cursor.execute("""
-            INSERT INTO dossier (id_eleve, id_scolarite, id_etude)
-            VALUES (?, ?, ?)
-        """, (matricule, annee_scolarite_id, get_etude_id_by_matricule(matricule)))
-        conn.commit()
-        print("Nouveau dossier créé avec succès.")
+#     if not result:
+#         print("Dossier non trouvé.")
+#          # Créer le nouveau dossier
+#         cursor.execute("""
+#             INSERT INTO dossier (id_eleve, id_scolarite, id_etude)
+#             VALUES (?, ?, ?)
+#         """, (matricule, annee_scolarite_id, get_etude_id_by_matricule(matricule)))
+#         conn.commit()
+#         print("Nouveau dossier créé avec succès.")
 
-      # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
-        cursor.execute("""
-        SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
-        FROM dossier d
-        JOIN students s ON d.id_eleve = s.matricule
-        JOIN etude e ON d.id_etude = e.id_etude
-        LEFT JOIN recu r ON d.id_dossier = r.id_dossier
-        WHERE s.matricule = ? AND d.id_scolarite = ?
-    """, (matricule, annee_scolarite_id))
+#       # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
+#         cursor.execute("""
+#         SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
+#         FROM dossier d
+#         JOIN students s ON d.id_eleve = s.matricule
+#         JOIN etude e ON d.id_etude = e.id_etude
+#         LEFT JOIN recu r ON d.id_dossier = r.id_dossier
+#         WHERE s.matricule = ? AND d.id_scolarite = ?
+#     """, (matricule, annee_scolarite_id))
     
-        result = cursor.fetchone()
+#         result = cursor.fetchone()
 
-    id_dossier, frais_scolaire, solde, nom, prenom, date_naissance, lieu_naissance, option_et_niveau= result
+#     id_dossier, frais_scolaire, solde, nom, prenom, date_naissance, lieu_naissance, option_et_niveau= result
 
-    # Calculer le nouveau solde et le montant restant
-    id_dossier1 = id_dossier
-    cursor.execute("""
-            SELECT montant_restant FROM recu WHERE id_dossier = ? ORDER BY id_recu DESC LIMIT 1;
-        """, (id_dossier1,))
-    result1 = cursor.fetchone()
+#     # Calculer le nouveau solde et le montant restant
+#     id_dossier1 = id_dossier
+#     cursor.execute("""
+#             SELECT montant_restant FROM recu WHERE id_dossier = ? ORDER BY id_recu DESC LIMIT 1;
+#         """, (id_dossier1,))
+#     result1 = cursor.fetchone()
 
-    if result1 :
-        montant_restant = result1[0]
-        montant_restant = montant_restant - montant_verse
-        nouveau_solde = frais_scolaire - montant_restant
-    else:
-        montant_restant = frais_scolaire - montant_verse
-        nouveau_solde = frais_scolaire - montant_restant
+#     if result1 :
+#         montant_restant = result1[0]
+#         montant_restant = montant_restant - montant_verse
+#         nouveau_solde = frais_scolaire - montant_restant
+#     else:
+#         montant_restant = frais_scolaire - montant_verse
+#         nouveau_solde = frais_scolaire - montant_restant
         
 
-    # Insérer le nouveau reçu dans la base de données
-    cursor.execute("""
-        INSERT INTO recu (id_dossier, raison, montant_verse, montant_restant, solde, date_paye)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, (id_dossier, raison, montant_verse, montant_restant, nouveau_solde, date_paye))
+#     # Insérer le nouveau reçu dans la base de données
+#     cursor.execute("""
+#         INSERT INTO recu (id_dossier, raison, montant_verse, montant_restant, solde, date_paye)
+#         VALUES (?, ?, ?, ?, ?, ?)
+#     """, (id_dossier, raison, montant_verse, montant_restant, nouveau_solde, date_paye))
 
-    conn.commit()
-    conn.close()
+#     conn.commit()
+#     conn.close()
 
-    # Générer le PDF du reçu après l'enregistrement
-    generate_receipt_pdf(matricule, date_paye, annee_scolaire, nom, prenom, date_naissance, lieu_naissance, montant_verse, raison, montant_restant,option_et_niveau)
+#     # Générer le PDF du reçu après l'enregistrement
+#     generate_receipt_pdf(matricule, date_paye, annee_scolaire, nom, prenom, date_naissance, lieu_naissance, montant_verse, raison, montant_restant,option_et_niveau)
 
 
-    print("Paiement enregistré avec succès.")
+#     print("Paiement enregistré avec succès.")
+
+def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
+    conn = sqlite3.connect('data/zani_db.db')
+    cursor = conn.cursor()
+    
+    datedeb, datefin = parse_annee_scolaire(annee_scolaire)
+
+    try:
+        # Vérifier si l'année scolaire existe déjà, sinon la créer
+        cursor.execute("""
+            SELECT id_scolarite FROM annee_scolaire 
+            WHERE debut = ? AND fin = ?
+        """, (datedeb, datefin))
+        annee_scolarite1 = cursor.fetchone()
+        
+        if annee_scolarite1 is None:
+            cursor.execute("""
+                INSERT INTO annee_scolaire (debut, fin)
+                VALUES (?, ?)
+            """, (datedeb, datefin))
+            annee_scolarite_id = cursor.lastrowid
+        else:
+            annee_scolarite_id = annee_scolarite1[0]
+
+        # Remplacer la virgule par un point pour les conversions
+        montant_verse = montant_verse.replace(',', '.')
+        montant_verse = float(montant_verse)
+        
+        # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
+        cursor.execute("""
+            SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
+            FROM dossier d
+            JOIN students s ON d.id_eleve = s.matricule
+            JOIN etude e ON d.id_etude = e.id_etude
+            LEFT JOIN recu r ON d.id_dossier = r.id_dossier
+            WHERE s.matricule = ? AND d.id_scolarite = ?
+        """, (matricule, annee_scolarite_id))
+        
+        result = cursor.fetchone()
+        
+        if not result:
+            # Créer le nouveau dossier
+            cursor.execute("""
+                INSERT INTO dossier (id_eleve, id_scolarite, id_etude)
+                VALUES (?, ?, ?)
+            """, (matricule, annee_scolarite_id, get_etude_id_by_matricule(matricule)))
+            conn.commit()
+            print("Nouveau dossier créé avec succès.")
+            
+            # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
+            cursor.execute("""
+                SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
+                FROM dossier d
+                JOIN students s ON d.id_eleve = s.matricule
+                JOIN etude e ON d.id_etude = e.id_etude
+                LEFT JOIN recu r ON d.id_dossier = r.id_dossier
+                WHERE s.matricule = ? AND d.id_scolarite = ?
+            """, (matricule, annee_scolarite_id))
+            
+            result = cursor.fetchone()
+
+        id_dossier, frais_scolaire, solde, nom, prenom, date_naissance, lieu_naissance, option_et_niveau = result
+
+        # Calculer le nouveau solde et le montant restant
+        cursor.execute("""
+            SELECT montant_restant FROM recu WHERE id_dossier = ? ORDER BY id_recu DESC LIMIT 1;
+        """, (id_dossier,))
+        result1 = cursor.fetchone()
+
+        if result1:
+            montant_restant = result1[0]
+            montant_restant = montant_restant - montant_verse
+            nouveau_solde = frais_scolaire - montant_restant
+        else:
+            montant_restant = frais_scolaire - montant_verse
+            nouveau_solde = frais_scolaire - montant_restant
+
+        # Insérer le nouveau reçu dans la base de données
+        cursor.execute("""
+            INSERT INTO recu (id_dossier, raison, montant_verse, montant_restant, solde, date_paye)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (id_dossier, raison, montant_verse, montant_restant, nouveau_solde, date_paye))
+
+        conn.commit()
+
+        # Générer le PDF du reçu après l'enregistrement
+        generate_receipt_pdf(matricule, date_paye, annee_scolaire, nom, prenom, date_naissance, lieu_naissance, montant_verse, raison, montant_restant, option_et_niveau)
+        
+        # Ouvrir le PDF généré pour impression
+        # pdf_path = os.path.join('Documents/Recus', f'{matricule}_{date_paye}.pdf')
+        # if os.path.isfile(pdf_path):
+        #     os.startfile(pdf_path, 'print')
+        
+        return "Le paiement a été enregistré avec succès et le reçu est enregistré dans Documents/Recus et s'ouvrira automatiquement pour l'impression."
+    
+    except Exception as e:
+        print(f"Erreur: {e}")
+        return "Une erreur s'est produite, veuillez réessayer ou contacter le service client."
+
+    finally:
+        conn.close()
 
 #Creer un new dossier etudiant
 def create_new_dossier(matricule, debut_annee, fin_annee, niveau, filiere):
