@@ -109,7 +109,7 @@ class PDF(FPDF):
         # Ajouter trois sections de reçus sur la même page avec un espacement vertical
         self.add_page()
         y_positions = [5, 95, 185]  # Les positions y de chaque section
-        sections = ["Coupon Scolarité", "Coupon Direction", "Coupon Apprenant"]  # Les titres de chaque section
+        sections = ["Coupon Apprenant", "Coupon Sécretariat", "Coupon Direction"]  # Les titres de chaque section
         for i, y_start in enumerate(y_positions):
             self.add_receipt_section(y_start, matricule, date, nom, prenom, filiere, niveau, date_naissance, lieu_naissance, montant_verse, raison, montant_restant, sections[i])
 
@@ -124,15 +124,32 @@ def generate_receipt_pdf(matricule, date_paye, annee_scolaire, nom, prenom, date
     nom_fichier = f"Recu_{matricule}_{date_formatee}.pdf"
     chemin_fichier = os.path.join(dossier_documents, nom_fichier)
 
+    # Vérifier si le fichier existe et ajouter un suffixe si nécessaire
+    compteur = 1
+    chemin_fichier_unique = chemin_fichier
+
+    while os.path.exists(chemin_fichier_unique):
+        # Obtenir le nom de fichier sans extension et l'extension
+        nom1, extension = os.path.splitext(nom_fichier)
+        
+        # Créer un nouveau nom de fichier avec le compteur
+        nouveau_nom_fichier = f"{nom1}_{compteur:02}{extension}"
+        
+        # Mettre à jour le chemin du fichier unique
+        chemin_fichier_unique = os.path.join(dossier_documents, nouveau_nom_fichier)
+        
+        # Incrémenter le compteur pour la prochaine vérification
+        compteur += 1
+
     # Création du PDF
     pdf = PDF()
     pdf.create_receipt(matricule, date_formatee, nom, prenom, option_et_niveau.split()[0], option_et_niveau.split()[1], date_naissance, lieu_naissance, montant_verse, raison, montant_restant)
-    pdf.output(chemin_fichier)
+    pdf.output(chemin_fichier_unique)
 
     # Ouvrir le PDF automatiquement
-    os.startfile(chemin_fichier)
+    os.startfile(chemin_fichier_unique)
 
-    print(f"PDF généré et enregistré sous : {chemin_fichier}")
+    print(f"PDF généré et enregistré sous : {chemin_fichier_unique}")
 
 # Exemple d'utilisation
 # generate_receipt_pdf(

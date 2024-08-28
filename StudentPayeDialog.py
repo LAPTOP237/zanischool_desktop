@@ -22,14 +22,14 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QDialog,
 import resources_rc
 
 class Ui_Dialog(QDialog):
-    def setupUi(self, Dialog):
-        if not Dialog.objectName():
-            Dialog.setObjectName(u"Dialog")
-        Dialog.resize(547, 584)
+    def setupUi(self, StudentPayeDialog):
+        if not StudentPayeDialog.objectName():
+            StudentPayeDialog.setObjectName(u"StudentPayeDialog")
+        self.resize(547, 584)
         icon = QIcon()
         icon.addFile(u":/icons/logo_zanischool.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        Dialog.setWindowIcon(icon)
-        Dialog.setStyleSheet(u"QDialog{\n"
+        self.setWindowIcon(icon)
+        self.setStyleSheet(u"QDialog{\n"
 "background-color: rgb(255, 255, 255);\n"
 "}\n"
 "\n"
@@ -72,12 +72,12 @@ class Ui_Dialog(QDialog):
 "}\n"
 "\n"
 "")
-        self.line = QFrame(Dialog)
+        self.line = QFrame(self)
         self.line.setObjectName(u"line")
         self.line.setGeometry(QRect(0, 40, 551, 20))
         self.line.setFrameShape(QFrame.Shape.HLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
-        self.layoutWidget_2 = QWidget(Dialog)
+        self.layoutWidget_2 = QWidget(self)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
         self.layoutWidget_2.setGeometry(QRect(310, 530, 221, 42))
         self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget_2)
@@ -115,7 +115,7 @@ class Ui_Dialog(QDialog):
 
         self.horizontalLayout_2.addWidget(self.paye_cancel_btn)
 
-        self.label = QLabel(Dialog)
+        self.label = QLabel(self)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(40, 10, 331, 31))
         font1 = QFont()
@@ -125,12 +125,20 @@ class Ui_Dialog(QDialog):
         font1.setItalic(True)
         self.label.setFont(font1)
         self.label.setStyleSheet(u"color: rgb(61, 48, 162);")
-        self.widget = QWidget(Dialog)
+        self.widget = QWidget(self)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 72, 521, 411))
-        self.verticalLayout_6 = QVBoxLayout(self.widget)
+        self.widget.setGeometry(QRect(10, 61, 521, 461))
+        self.verticalLayout_7 = QVBoxLayout(self.widget)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.name_searchlineEdit = QLineEdit(self.widget)
+        self.name_searchlineEdit.setObjectName(u"name_searchlineEdit")
+        self.name_searchlineEdit.setFont(font)
+
+        self.verticalLayout_7.addWidget(self.name_searchlineEdit)
+
+        self.verticalLayout_6 = QVBoxLayout()
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_2 = QLabel(self.widget)
@@ -167,13 +175,14 @@ class Ui_Dialog(QDialog):
 
         self.verticalLayout_2.addWidget(self.label_3)
 
-        self.paye_raison_lineEdit = QLineEdit(self.widget)
-        self.paye_raison_lineEdit.setObjectName(u"paye_raison_lineEdit")
-        self.paye_raison_lineEdit.setMinimumSize(QSize(0, 35))
-        self.paye_raison_lineEdit.setMaximumSize(QSize(16777215, 35))
-        self.paye_raison_lineEdit.setFont(font3)
+        self.comboBox = QComboBox(self.widget)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.setFont(font)
 
-        self.verticalLayout_2.addWidget(self.paye_raison_lineEdit)
+        self.verticalLayout_2.addWidget(self.comboBox)
 
 
         self.verticalLayout_6.addLayout(self.verticalLayout_2)
@@ -239,21 +248,27 @@ class Ui_Dialog(QDialog):
         self.verticalLayout_6.addLayout(self.verticalLayout_5)
 
 
-        self.retranslateUi(Dialog)
+        self.verticalLayout_7.addLayout(self.verticalLayout_6)
 
-        QMetaObject.connectSlotsByName(Dialog)
+
+        self.retranslateUi()
+
+        QMetaObject.connectSlotsByName(self)
     # setupUi
 
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Gestions de Apprenants", None))
+    def retranslateUi(self):
+        self.setWindowTitle(QCoreApplication.translate("Dialog", u"Gestions de Apprenants", None))
         self.savePayementBtn.setText(QCoreApplication.translate("Dialog", u"Enregistrer", None))
         self.paye_cancel_btn.setText(QCoreApplication.translate("Dialog", u"Annuler", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Nouveau Paiement", None))
+        self.name_searchlineEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Entrez le nom ici pour rechercher automatiquement le matricule", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"Matricule", None))
         self.paye_matricule_lineEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Entrez le matricule de l'apprenant", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"Raison", None))
-        self.paye_raison_lineEdit.setText("")
-        self.paye_raison_lineEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Inscription, premiere ou deuxieme tranche", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Dialog", u"Inscription", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("Dialog", u"Premiere Tranche", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("Dialog", u"Deuxieme Tranche", None))
+
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Montant vers\u00e9", None))
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Date de paiement", None))
         self.label_5.setText(QCoreApplication.translate("Dialog", u"Annee Scolaire", None))

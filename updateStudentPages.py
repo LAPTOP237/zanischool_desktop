@@ -1,13 +1,23 @@
 from PySide6.QtWidgets import QMessageBox
 from PySide6.QtCore import QDate
 from UpdateStudentDialog import Ui_UpdateStudent_Dialog
-from data.student_management import update_student
+from data.student_management import update_student, get_all_etudes
 
 class StudentUpdatePage(Ui_UpdateStudent_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.setup_connections()
+
+        self.load_combo_box_items() #Pour gerer les items de mon combox de mes classes
+
+    def load_combo_box_items(self):
+        etudes = get_all_etudes()
+    
+        for etude in etudes:
+            id_niveau, id_filiere = etude
+            item_text = f"{id_filiere} {id_niveau}"
+            self.update_class_comboBox_2.addItem(item_text)
 
     def setup_connections(self):
         # Connecter les boutons aux méthodes

@@ -7,7 +7,9 @@ from StudentPayePage import StudentPayePage
 from ui_index import Ui_MainWindow
 from data.exportManager import ExportManager
 
-from data.student_management import get_all_students, delete_student, search_students, filter_students, initialize_db,get_student_by_matricule
+from data.student_management import get_all_students,get_all_etudes, delete_student, search_students, filter_students, initialize_db,get_student_by_matricule
+from data.payement_management import delete_payment, get_all_payments, get_payment_by_matricule, search_payments, filter_payments 
+
 from updateStudentPages import StudentUpdatePage
 
 class MySideBar(QMainWindow, Ui_MainWindow):
@@ -19,6 +21,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         initialize_db()  # Initialiser la base de données au lancement
         self.load_students() # Chargement de la liste des etudiants
+        self.load_payments()
         # Configurez votre interface utilisateur ici
         
         # Redimensionner les colonnes en fonction de leur contenu
@@ -28,13 +31,20 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.tableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 
+        # Redimensionner les colonnes en fonction de leur contenu
+        self.tableWidget_2.resizeColumnsToContents()
+        
+        # Configurer les barres de défilement
+        self.tableWidget_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.tableWidget_2.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+
         #Cacher le Widget Menu
         self.icon_only_widget.setHidden(True)
 
         #Ccher les Dropdowns
-        self.students_dropdown.setHidden(True)
-        self.teachers_dropdown.setHidden(True)
-        self.finances_dropdown.setHidden(True)
+        self.students_dropdown.setHidden(False)
+        self.teachers_dropdown.setHidden(False)
+        self.finances_dropdown.setHidden(False)
 
         #Connecter nos differents boutons aux fonctions pour switcher entre les pages
         self.dashboard1.clicked.connect(self.switch_to_dashboard_page)
@@ -78,6 +88,16 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.exportExcel_btn.clicked.connect(self.on_export_excel)
         self.export_manager = ExportManager(self)
         
+        self.load_combo_box_items() #Pour gerer les items de mon combox de mes classes
+
+    def load_combo_box_items(self):
+        etudes = get_all_etudes()
+    
+        for etude in etudes:
+            id_niveau, id_filiere = etude
+            item_text = f"{id_filiere} {id_niveau}"
+            self.filterClass_comboBox.addItem(item_text)
+            self.filterClass_comboBox_2.addItem(item_text)
 
     #Methodes pour switcher entres les pages
     def switch_to_dashboard_page(self):
@@ -235,7 +255,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         # Ouvrir la boîte de dialogue pour ajouter un nouvel étudiant
         dialog = StudentPayePage()
         if dialog.exec():
-            self.load_students()  # Recharger les données après ajout
+            self.load_payments()  # Recharger les données après ajout  # Recharger les données après ajout
 
     def edit_student(self, row_index):
         if self.user_role == 'admin':
@@ -314,30 +334,146 @@ class MySideBar(QMainWindow, Ui_MainWindow):
             self.add_actions_buttons(row_index)
 ### fin Gerer la listers des apprenants
 
-##Exportation du table etudiant
+    ##Exportation du table etudiant
     def on_export_pdf(self):
-        """Handler pour le bouton d'exportation en PDF."""
-        students_data = self.get_table_data()
-        self.export_manager.export_to_pdf(students_data)
+            """Handler pour le bouton d'exportation en PDF."""
+            students_data = self.get_table_data()
+            self.export_manager.export_to_pdf(students_data)
 
     def on_export_excel(self):
-        """Handler pour le bouton d'exportation en Excel."""
-        students_data = self.get_table_data()
-        self.export_manager.export_to_excel(students_data)
+            """Handler pour le bouton d'exportation en Excel."""
+            students_data = self.get_table_data()
+            self.export_manager.export_to_excel(students_data)
 
     def get_table_data(self):
-        """Récupère les données du QTableWidget."""
-        data = []
-        rows = self.tableWidget.rowCount()
-        columns = self.tableWidget.columnCount()
+            """Récupère les données du QTableWidget."""
+            data = []
+            rows = self.tableWidget.rowCount()
+            columns = self.tableWidget.columnCount()
 
-        for row in range(rows):
-            row_data = {}
-            for col in range(columns):
-                item = self.tableWidget.item(row, col)
-                if item is not None:
-                    row_data[self.tableWidget.horizontalHeaderItem(col).text()] = item.text()
-            data.append(row_data)
+            for row in range(rows):
+                row_data = {}
+                for col in range(columns):
+                    item = self.tableWidget.item(row, col)
+                    if item is not None:
+                        row_data[self.tableWidget.horizontalHeaderItem(col).text()] = item.text()
+                data.append(row_data)
 
-        return data
-##Fin Exportation du table etudiant
+            return data
+    ##Fin Exportation du table etudiant
+
+
+    ## La page des listes des paiements
+
+    def load_payments(self):
+        # Charge les données des paiements dans le tableau
+        payments = get_all_payments()  # Implémentez cette fonction dans payement_management
+        self.tableWidget_2.setRowCount(0)
+        for row_index, row in enumerate(payments):
+            self.tableWidget_2.insertRow(row_index)
+            for col_index, item in enumerate(row):  # Inclure toutes les colonnes ici
+                self.tableWidget_2.setItem(row_index, col_index, QTableWidgetItem(str(item)))
+            
+            # Ajouter des boutons d'action stylisés   
+            self.add_payment_actions_buttons(row_index)
+
+    def add_payment_actions_buttons(self, row_index):
+        # Ajouter des boutons d'action stylisés
+        edit_button = QPushButton()
+        delete_button = QPushButton()
+        
+        # Configurer les icônes et styles des boutons
+        edit_button.setIcon(QIcon("icons/icons8-edit-50.png"))
+        edit_button.setStyleSheet("background-color: #0077BD; border-radius: 5px; color: white; margin-bottom:6px;")
+        edit_button.setFixedSize(25, 25)
+        delete_button.setIcon(QIcon("icons/icons8-delete-50.png"))
+        delete_button.setStyleSheet("background-color: #FF4C4C; border-radius: 5px; color: white; margin-bottom:6px;")
+        delete_button.setFixedSize(25, 25)
+        
+        edit_button.clicked.connect(lambda checked, r=row_index: self.edit_payment(r))
+        delete_button.clicked.connect(lambda checked, r=row_index: self.confirm_delete_payment(r))
+        
+        # Ajouter les boutons côte à côte dans la colonne Actions
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(edit_button)
+        button_layout.addWidget(delete_button)
+        
+        # Créer un widget pour contenir les boutons
+        button_widget = QWidget()
+        button_widget.setLayout(button_layout)
+        
+        self.tableWidget_2.setCellWidget(row_index, 11, button_widget)  # Assurez-vous que l'index est correct
+
+
+    def edit_payment(self, row_index):
+        # if self.user_role == 'admin':
+        #     matricule = self.tableWidget_2.item(row_index, 0).text()
+        #     # Récupérer les données du paiement à partir de l'index de la ligne
+        #     payment_data = self.get_payment_data(matricule)
+            
+        #     # Ouvrir la boîte de dialogue pour modifier les informations du paiement
+        #     dialog = PaymentUpdatePage(self)  # Créez cette classe
+        #     dialog.load_payment_data(payment_data)
+            
+        #     if dialog.exec():
+        #         self.load_payments()  # Recharger les données après la modification
+        # else:
+        #     QMessageBox.warning(self, "Erreur", "Vous n'avez pas les droits nécessaires pour la modification.")
+        QMessageBox.warning(self, "Erreur", "Fonctionnalité en cours de developpement")
+
+    def get_payment_data(self, matricule):
+        return get_payment_by_matricule(matricule)  # Implémentez cette fonction
+
+    def confirm_delete_payment(self, row_index):
+        if self.user_role == 'admin':
+            matricule = self.tableWidget_2.item(row_index, 0).text()  # Supposons que la première colonne est le matricule
+
+            # Créer la boîte de dialogue de confirmation
+            reply = QMessageBox.question(self, 'Confirmation', f"Êtes-vous sûr de vouloir supprimer le paiement avec le matricule {matricule} ?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+            if reply == QMessageBox.Yes:
+                self.delete_payment(row_index)
+        else:
+            QMessageBox.warning(self, "Erreur", "Vous n'avez pas les droits nécessaires pour la suppression.")
+
+    def delete_payment(self, row_index):
+        # Supprimer un paiement de la base de données et mettre à jour le tableau
+        id_payement = self.tableWidget_2.item(row_index, 0).text()
+        delete_payment(id_payement)  # Implémentez cette fonction
+        self.load_payments()
+
+    def apply_payment_filters(self):
+        # Appliquer les filtres en fonction des critères
+        # Exemple : filtre par sexe et classe
+        gender_filter = self.filterGender_comboBox_2.currentText()
+        class_filter = self.filterClass_comboBox_2.currentText()
+
+        if gender_filter == "Selectionner le sexe":
+            gender_filter = None
+        if class_filter == "Selectionner la classe":
+            class_filter = None
+        
+        payments = filter_payments(gender_filter, class_filter)  # Implémentez cette fonction
+        self.tableWidget_2.setRowCount(0)
+        for row_index, row in enumerate(payments):
+            self.tableWidget_2.insertRow(row_index)
+            for col_index, item in enumerate(row):  # Inclure toutes les colonnes ici
+                self.tableWidget_2.setItem(row_index, col_index, QTableWidgetItem(str(item)))
+            
+            # Ajouter des boutons d'action stylisés   
+            self.add_payment_actions_buttons(row_index)
+
+    def apply_payment_search(self):
+        # Appliquer la recherche en temps réel sur le tableau
+        search_text = self.searchStudent_lineEdit_2.text()
+        
+        payments = search_payments(search_text)  # Implémentez cette fonction
+        self.tableWidget_2.setRowCount(0)
+        for row_index, row in enumerate(payments):
+            self.tableWidget_2.insertRow(row_index)
+            for col_index, item in enumerate(row):  # Inclure toutes les colonnes ici
+                self.tableWidget_2.setItem(row_index, col_index, QTableWidgetItem(str(item)))
+            
+            # Ajouter des boutons d'action stylisés   
+            self.add_payment_actions_buttons(row_index)
+

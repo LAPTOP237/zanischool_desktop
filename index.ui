@@ -935,8 +935,8 @@ border-radius:3px;
      </layout>
     </item>
     <item row="0" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout_14">
-      <item>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
        <widget class="QWidget" name="header_widget" native="true">
         <property name="minimumSize">
          <size>
@@ -1088,7 +1088,7 @@ border-radius:3px;
         </layout>
        </widget>
       </item>
-      <item>
+      <item row="1" column="0">
        <widget class="QWidget" name="main_screen_widget" native="true">
         <property name="minimumSize">
          <size>
@@ -1110,7 +1110,7 @@ background-color: rgb(243, 243, 243);</string>
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>3</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page">
             <widget class="QLabel" name="label">
@@ -1445,32 +1445,7 @@ font-weight:bold;
                    </property>
                    <item>
                     <property name="text">
-                     <string>Selectionner la classe</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>ESCO 1</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>ESCO 2</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>ATELIER 1</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>ATELIER 2</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>COME 1</string>
+                     <string>Selectionner le sexe</string>
                     </property>
                    </item>
                   </widget>
@@ -1597,131 +1572,76 @@ color:white;}</string>
             </layout>
            </widget>
            <widget class="QWidget" name="page_4">
-            <widget class="QTableWidget" name="tableWidget_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>180</y>
-               <width>883</width>
-               <height>545</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>500</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QHeaderView:section{
-font-weight:bold;
-background-color:black;
-color:white;}</string>
-             </property>
-             <column>
-              <property name="text">
-               <string>Matricule</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Nom</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Prénoms</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Sexe</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Classe</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Raison</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Montant versé</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Date de versement</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Solde</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Reste</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Actions</string>
-              </property>
-             </column>
-            </widget>
-            <widget class="QWidget" name="layoutWidget">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>70</y>
-               <width>642</width>
-               <height>37</height>
-              </rect>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
-              <property name="spacing">
-               <number>20</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QPushButton" name="addPayeOldStudentBtn">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>35</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>285</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>-1</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QPushButton{
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_16">
+               <item>
+                <widget class="QLabel" name="label_10">
+                 <property name="font">
+                  <font>
+                   <family>Montserrat SemiBold</family>
+                   <pointsize>14</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Paiements Apprenants</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_20">
+                 <property name="font">
+                  <font>
+                   <family>Montserrat Medium</family>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Ceci est la page pour enregistrer les paiements des apprenants et generer les recus</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <property name="spacing">
+                <number>20</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="addPayeOldStudentBtn">
+                 <property name="minimumSize">
+                  <size>
+                   <width>200</width>
+                   <height>35</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>285</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>-1</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton{
 color:white;
 border:none;
 border-radius:8px;
@@ -1729,39 +1649,39 @@ font-size:15px;
 	background-color: rgb(0, 117, 0);
 font-weight:bold;
 }</string>
-                </property>
-                <property name="text">
-                 <string>Enregistrer un paiement (Ancien)</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/icons/icons8-add-male-user-64.png</normaloff>:/icons/icons8-add-male-user-64.png</iconset>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="addPayeNewStudentBtn_2">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>35</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>300</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>-1</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QPushButton{
+                 </property>
+                 <property name="text">
+                  <string>Enregistrer un paiement (Ancien)</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icons/icons8-add-male-user-64.png</normaloff>:/icons/icons8-add-male-user-64.png</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="addPayeNewStudentBtn_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>200</width>
+                   <height>35</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>300</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>-1</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton{
 color:white;
 border:none;
 border-radius:8px;
@@ -1769,61 +1689,53 @@ font-size:15px;
 	background-color: rgb(187, 187, 187);
 font-weight:bold;
 }</string>
-                </property>
-                <property name="text">
-                 <string>Enregistrer un paiement (Nouveau)</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/icons/fianances1.png</normaloff>:/icons/fianances1.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="layoutWidget">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>130</y>
-               <width>752</width>
-               <height>39</height>
-              </rect>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <property name="spacing">
-               <number>15</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="label_23">
-                <property name="maximumSize">
-                 <size>
-                  <width>70</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>8</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Filtré par :</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="filterGender_comboBox_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>170</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QComboBox{
+                 </property>
+                 <property name="text">
+                  <string>Enregistrer un paiement (Nouveau)</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icons/fianances1.png</normaloff>:/icons/fianances1.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <property name="spacing">
+                <number>15</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_23">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Filtré par :</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="filterGender_comboBox_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>170</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QComboBox{
 border: 1px solid gray;
 border-radius: 5px;
 height:35px;
@@ -1833,34 +1745,34 @@ background-color: black;
 selection-background-color: rgb(176, 94, 255);
 font-weight:bold;
 }</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Selectionner le sexe</string>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Féminin</string>
+                 <item>
+                  <property name="text">
+                   <string>Selectionner le sexe</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Féminin</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Masculin</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="filterClass_comboBox_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>185</width>
+                   <height>16777215</height>
+                  </size>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Masculin</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="filterClass_comboBox_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>185</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QComboBox{
+                 <property name="styleSheet">
+                  <string notr="true">QComboBox{
 border: 1px solid gray;
 border-radius: 5px;
 height:35px;
@@ -1870,114 +1782,129 @@ background-color: black;
 selection-background-color: rgb(176, 94, 255);
 font-weight:bold;
 }</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Selectionner la classe</string>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>ESCO 1</string>
+                 <item>
+                  <property name="text">
+                   <string>Selectionner la classe</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="searchStudent_lineEdit_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>300</width>
+                   <height>0</height>
+                  </size>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>ESCO 2</string>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>31</height>
+                  </size>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>ATELIER 1</string>
+                 <property name="font">
+                  <font>
+                   <pointsize>9</pointsize>
+                   <strikeout>false</strikeout>
+                  </font>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>ATELIER 2</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>COME 1</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="searchStudent_lineEdit_2">
-                <property name="minimumSize">
-                 <size>
-                  <width>300</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>31</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>9</pointsize>
-                  <strikeout>false</strikeout>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QLineEdit{
+                 <property name="styleSheet">
+                  <string notr="true">QLineEdit{
 	border:1px solid black;
 	border-radius:5px;
 	padding:5px;
     
 }</string>
-                </property>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Rechercher ici...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="0">
+              <widget class="QTableWidget" name="tableWidget_2">
+               <property name="minimumSize">
+                <size>
+                 <width>500</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QHeaderView:section{
+font-weight:bold;
+background-color:black;
+color:white;}</string>
+               </property>
+               <column>
                 <property name="text">
-                 <string/>
+                 <string>id</string>
                 </property>
-                <property name="placeholderText">
-                 <string>Rechercher ici...</string>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Matricule</string>
                 </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QLabel" name="label_10">
-             <property name="geometry">
-              <rect>
-               <x>1</x>
-               <y>1</y>
-               <width>275</width>
-               <height>32</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <family>Montserrat SemiBold</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Paiements Apprenants</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_20">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>40</y>
-               <width>549</width>
-               <height>18</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <family>Montserrat Medium</family>
-              </font>
-             </property>
-             <property name="text">
-              <string>Ceci est la page pour enregistrer les paiements des apprenants et generer les recus</string>
-             </property>
-            </widget>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Prénoms</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Sexe</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Classe</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Raison</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Montant versé</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Date de versement</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Solde</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Reste</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Actions</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="page_5">
             <widget class="QLabel" name="label_11">

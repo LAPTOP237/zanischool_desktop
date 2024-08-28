@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QMessageBox
 from StudentDialog import Ui_StudentDialog
-from data.student_management import save_student_to_db
+from data.student_management import save_student_to_db, get_all_etudes
 from data.database import initialize_db
 
 class StudentPage(Ui_StudentDialog):
@@ -11,8 +11,16 @@ class StudentPage(Ui_StudentDialog):
         self.saveStudentBtn.clicked.connect(self.validate_and_save)
         self.cancel_btn.clicked.connect(self.reject)
         initialize_db()  # Initialiser la base de données au lancement
+        self.load_combo_box_items() #Pour gerer les items de mon combox de mes classes
 
+    def load_combo_box_items(self):
+        etudes = get_all_etudes()
     
+        for etude in etudes:
+            id_niveau, id_filiere = etude
+            item_text = f"{id_filiere} {id_niveau}"
+            self.class_comboBox_2.addItem(item_text)
+           
     def validate_and_save(self):
         if self.validate_fields():
             self.save_student()

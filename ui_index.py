@@ -548,8 +548,8 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addLayout(self.gridLayout, 0, 0, 1, 1)
 
-        self.verticalLayout_14 = QVBoxLayout()
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.gridLayout_5 = QGridLayout()
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.header_widget = QWidget(self.centralwidget)
         self.header_widget.setObjectName(u"header_widget")
         self.header_widget.setMinimumSize(QSize(0, 80))
@@ -633,7 +633,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addLayout(self.horizontalLayout_3)
 
 
-        self.verticalLayout_14.addWidget(self.header_widget)
+        self.gridLayout_5.addWidget(self.header_widget, 0, 0, 1, 1)
 
         self.main_screen_widget = QWidget(self.centralwidget)
         self.main_screen_widget.setObjectName(u"main_screen_widget")
@@ -797,11 +797,6 @@ class Ui_MainWindow(object):
 
         self.filterClass_comboBox = QComboBox(self.page_3)
         self.filterClass_comboBox.addItem("")
-        self.filterClass_comboBox.addItem("")
-        self.filterClass_comboBox.addItem("")
-        self.filterClass_comboBox.addItem("")
-        self.filterClass_comboBox.addItem("")
-        self.filterClass_comboBox.addItem("")
         self.filterClass_comboBox.setObjectName(u"filterClass_comboBox")
         self.filterClass_comboBox.setMaximumSize(QSize(185, 16777215))
         self.filterClass_comboBox.setStyleSheet(u"QComboBox{\n"
@@ -876,9 +871,134 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
+        self.gridLayout_2 = QGridLayout(self.page_4)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.verticalLayout_16 = QVBoxLayout()
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.label_10 = QLabel(self.page_4)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setFont(font4)
+
+        self.verticalLayout_16.addWidget(self.label_10)
+
+        self.label_20 = QLabel(self.page_4)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setFont(font2)
+
+        self.verticalLayout_16.addWidget(self.label_20)
+
+
+        self.gridLayout_2.addLayout(self.verticalLayout_16, 0, 0, 1, 1)
+
+        self.horizontalLayout_14 = QHBoxLayout()
+        self.horizontalLayout_14.setSpacing(20)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.addPayeOldStudentBtn = QPushButton(self.page_4)
+        self.addPayeOldStudentBtn.setObjectName(u"addPayeOldStudentBtn")
+        self.addPayeOldStudentBtn.setMinimumSize(QSize(200, 35))
+        self.addPayeOldStudentBtn.setMaximumSize(QSize(285, 16777215))
+        self.addPayeOldStudentBtn.setFont(font5)
+        self.addPayeOldStudentBtn.setStyleSheet(u"QPushButton{\n"
+"color:white;\n"
+"border:none;\n"
+"border-radius:8px;\n"
+"font-size:15px;\n"
+"	background-color: rgb(0, 117, 0);\n"
+"font-weight:bold;\n"
+"}")
+        self.addPayeOldStudentBtn.setIcon(icon16)
+
+        self.horizontalLayout_14.addWidget(self.addPayeOldStudentBtn)
+
+        self.addPayeNewStudentBtn_2 = QPushButton(self.page_4)
+        self.addPayeNewStudentBtn_2.setObjectName(u"addPayeNewStudentBtn_2")
+        self.addPayeNewStudentBtn_2.setMinimumSize(QSize(200, 35))
+        self.addPayeNewStudentBtn_2.setMaximumSize(QSize(300, 16777215))
+        self.addPayeNewStudentBtn_2.setFont(font5)
+        self.addPayeNewStudentBtn_2.setStyleSheet(u"QPushButton{\n"
+"color:white;\n"
+"border:none;\n"
+"border-radius:8px;\n"
+"font-size:15px;\n"
+"	background-color: rgb(187, 187, 187);\n"
+"font-weight:bold;\n"
+"}")
+        icon19 = QIcon()
+        icon19.addFile(u":/icons/fianances1.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.addPayeNewStudentBtn_2.setIcon(icon19)
+
+        self.horizontalLayout_14.addWidget(self.addPayeNewStudentBtn_2)
+
+
+        self.gridLayout_2.addLayout(self.horizontalLayout_14, 1, 0, 1, 1)
+
+        self.horizontalLayout_12 = QHBoxLayout()
+        self.horizontalLayout_12.setSpacing(15)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.label_23 = QLabel(self.page_4)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setMaximumSize(QSize(70, 16777215))
+        self.label_23.setFont(font6)
+
+        self.horizontalLayout_12.addWidget(self.label_23)
+
+        self.filterGender_comboBox_2 = QComboBox(self.page_4)
+        self.filterGender_comboBox_2.addItem("")
+        self.filterGender_comboBox_2.addItem("")
+        self.filterGender_comboBox_2.addItem("")
+        self.filterGender_comboBox_2.setObjectName(u"filterGender_comboBox_2")
+        self.filterGender_comboBox_2.setMaximumSize(QSize(170, 16777215))
+        self.filterGender_comboBox_2.setStyleSheet(u"QComboBox{\n"
+"border: 1px solid gray;\n"
+"border-radius: 5px;\n"
+"height:35px;\n"
+"padding-left:15px;\n"
+"color:white;\n"
+"background-color: black;\n"
+"selection-background-color: rgb(176, 94, 255);\n"
+"font-weight:bold;\n"
+"}")
+
+        self.horizontalLayout_12.addWidget(self.filterGender_comboBox_2)
+
+        self.filterClass_comboBox_2 = QComboBox(self.page_4)
+        self.filterClass_comboBox_2.addItem("")
+        self.filterClass_comboBox_2.setObjectName(u"filterClass_comboBox_2")
+        self.filterClass_comboBox_2.setMaximumSize(QSize(185, 16777215))
+        self.filterClass_comboBox_2.setStyleSheet(u"QComboBox{\n"
+"border: 1px solid gray;\n"
+"border-radius: 5px;\n"
+"height:35px;\n"
+"padding-left:15px;\n"
+"color:white;\n"
+"background-color: black;\n"
+"selection-background-color: rgb(176, 94, 255);\n"
+"font-weight:bold;\n"
+"}")
+
+        self.horizontalLayout_12.addWidget(self.filterClass_comboBox_2)
+
+        self.searchStudent_lineEdit_2 = QLineEdit(self.page_4)
+        self.searchStudent_lineEdit_2.setObjectName(u"searchStudent_lineEdit_2")
+        self.searchStudent_lineEdit_2.setMinimumSize(QSize(300, 0))
+        self.searchStudent_lineEdit_2.setMaximumSize(QSize(16777215, 31))
+        self.searchStudent_lineEdit_2.setFont(font3)
+        self.searchStudent_lineEdit_2.setStyleSheet(u"QLineEdit{\n"
+"	border:1px solid black;\n"
+"	border-radius:5px;\n"
+"	padding:5px;\n"
+"    \n"
+"}")
+
+        self.horizontalLayout_12.addWidget(self.searchStudent_lineEdit_2)
+
+
+        self.gridLayout_2.addLayout(self.horizontalLayout_12, 2, 0, 1, 1)
+
         self.tableWidget_2 = QTableWidget(self.page_4)
-        if (self.tableWidget_2.columnCount() < 11):
-            self.tableWidget_2.setColumnCount(11)
+        if (self.tableWidget_2.columnCount() < 12):
+            self.tableWidget_2.setColumnCount(12)
         __qtablewidgetitem10 = QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(0, __qtablewidgetitem10)
         __qtablewidgetitem11 = QTableWidgetItem()
@@ -901,133 +1021,17 @@ class Ui_MainWindow(object):
         self.tableWidget_2.setHorizontalHeaderItem(9, __qtablewidgetitem19)
         __qtablewidgetitem20 = QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(10, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(11, __qtablewidgetitem21)
         self.tableWidget_2.setObjectName(u"tableWidget_2")
-        self.tableWidget_2.setGeometry(QRect(0, 180, 883, 545))
         self.tableWidget_2.setMinimumSize(QSize(500, 0))
         self.tableWidget_2.setStyleSheet(u"QHeaderView:section{\n"
 "font-weight:bold;\n"
 "background-color:black;\n"
 "color:white;}")
-        self.layoutWidget = QWidget(self.page_4)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(0, 70, 642, 37))
-        self.horizontalLayout_14 = QHBoxLayout(self.layoutWidget)
-        self.horizontalLayout_14.setSpacing(20)
-        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.addPayeOldStudentBtn = QPushButton(self.layoutWidget)
-        self.addPayeOldStudentBtn.setObjectName(u"addPayeOldStudentBtn")
-        self.addPayeOldStudentBtn.setMinimumSize(QSize(200, 35))
-        self.addPayeOldStudentBtn.setMaximumSize(QSize(285, 16777215))
-        self.addPayeOldStudentBtn.setFont(font5)
-        self.addPayeOldStudentBtn.setStyleSheet(u"QPushButton{\n"
-"color:white;\n"
-"border:none;\n"
-"border-radius:8px;\n"
-"font-size:15px;\n"
-"	background-color: rgb(0, 117, 0);\n"
-"font-weight:bold;\n"
-"}")
-        self.addPayeOldStudentBtn.setIcon(icon16)
 
-        self.horizontalLayout_14.addWidget(self.addPayeOldStudentBtn)
+        self.gridLayout_2.addWidget(self.tableWidget_2, 3, 0, 1, 1)
 
-        self.addPayeNewStudentBtn_2 = QPushButton(self.layoutWidget)
-        self.addPayeNewStudentBtn_2.setObjectName(u"addPayeNewStudentBtn_2")
-        self.addPayeNewStudentBtn_2.setMinimumSize(QSize(200, 35))
-        self.addPayeNewStudentBtn_2.setMaximumSize(QSize(300, 16777215))
-        self.addPayeNewStudentBtn_2.setFont(font5)
-        self.addPayeNewStudentBtn_2.setStyleSheet(u"QPushButton{\n"
-"color:white;\n"
-"border:none;\n"
-"border-radius:8px;\n"
-"font-size:15px;\n"
-"	background-color: rgb(187, 187, 187);\n"
-"font-weight:bold;\n"
-"}")
-        icon19 = QIcon()
-        icon19.addFile(u":/icons/fianances1.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.addPayeNewStudentBtn_2.setIcon(icon19)
-
-        self.horizontalLayout_14.addWidget(self.addPayeNewStudentBtn_2)
-
-        self.layoutWidget1 = QWidget(self.page_4)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(0, 130, 752, 39))
-        self.horizontalLayout_12 = QHBoxLayout(self.layoutWidget1)
-        self.horizontalLayout_12.setSpacing(15)
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.label_23 = QLabel(self.layoutWidget1)
-        self.label_23.setObjectName(u"label_23")
-        self.label_23.setMaximumSize(QSize(70, 16777215))
-        self.label_23.setFont(font6)
-
-        self.horizontalLayout_12.addWidget(self.label_23)
-
-        self.filterGender_comboBox_2 = QComboBox(self.layoutWidget1)
-        self.filterGender_comboBox_2.addItem("")
-        self.filterGender_comboBox_2.addItem("")
-        self.filterGender_comboBox_2.addItem("")
-        self.filterGender_comboBox_2.setObjectName(u"filterGender_comboBox_2")
-        self.filterGender_comboBox_2.setMaximumSize(QSize(170, 16777215))
-        self.filterGender_comboBox_2.setStyleSheet(u"QComboBox{\n"
-"border: 1px solid gray;\n"
-"border-radius: 5px;\n"
-"height:35px;\n"
-"padding-left:15px;\n"
-"color:white;\n"
-"background-color: black;\n"
-"selection-background-color: rgb(176, 94, 255);\n"
-"font-weight:bold;\n"
-"}")
-
-        self.horizontalLayout_12.addWidget(self.filterGender_comboBox_2)
-
-        self.filterClass_comboBox_2 = QComboBox(self.layoutWidget1)
-        self.filterClass_comboBox_2.addItem("")
-        self.filterClass_comboBox_2.addItem("")
-        self.filterClass_comboBox_2.addItem("")
-        self.filterClass_comboBox_2.addItem("")
-        self.filterClass_comboBox_2.addItem("")
-        self.filterClass_comboBox_2.addItem("")
-        self.filterClass_comboBox_2.setObjectName(u"filterClass_comboBox_2")
-        self.filterClass_comboBox_2.setMaximumSize(QSize(185, 16777215))
-        self.filterClass_comboBox_2.setStyleSheet(u"QComboBox{\n"
-"border: 1px solid gray;\n"
-"border-radius: 5px;\n"
-"height:35px;\n"
-"padding-left:15px;\n"
-"color:white;\n"
-"background-color: black;\n"
-"selection-background-color: rgb(176, 94, 255);\n"
-"font-weight:bold;\n"
-"}")
-
-        self.horizontalLayout_12.addWidget(self.filterClass_comboBox_2)
-
-        self.searchStudent_lineEdit_2 = QLineEdit(self.layoutWidget1)
-        self.searchStudent_lineEdit_2.setObjectName(u"searchStudent_lineEdit_2")
-        self.searchStudent_lineEdit_2.setMinimumSize(QSize(300, 0))
-        self.searchStudent_lineEdit_2.setMaximumSize(QSize(16777215, 31))
-        self.searchStudent_lineEdit_2.setFont(font3)
-        self.searchStudent_lineEdit_2.setStyleSheet(u"QLineEdit{\n"
-"	border:1px solid black;\n"
-"	border-radius:5px;\n"
-"	padding:5px;\n"
-"    \n"
-"}")
-
-        self.horizontalLayout_12.addWidget(self.searchStudent_lineEdit_2)
-
-        self.label_10 = QLabel(self.page_4)
-        self.label_10.setObjectName(u"label_10")
-        self.label_10.setGeometry(QRect(1, 1, 275, 32))
-        self.label_10.setFont(font4)
-        self.label_20 = QLabel(self.page_4)
-        self.label_20.setObjectName(u"label_20")
-        self.label_20.setGeometry(QRect(0, 40, 549, 18))
-        self.label_20.setFont(font2)
         self.stackedWidget.addWidget(self.page_4)
         self.page_5 = QWidget()
         self.page_5.setObjectName(u"page_5")
@@ -1089,10 +1093,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.addWidget(self.stackedWidget)
 
 
-        self.verticalLayout_14.addWidget(self.main_screen_widget)
+        self.gridLayout_5.addWidget(self.main_screen_widget, 1, 0, 1, 1)
 
 
-        self.gridLayout_3.addLayout(self.verticalLayout_14, 0, 1, 1, 1)
+        self.gridLayout_3.addLayout(self.gridLayout_5, 0, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -1116,7 +1120,7 @@ class Ui_MainWindow(object):
         self.menu_burger.toggled.connect(self.icon_text_widget.setHidden)
         self.menu_burger.toggled.connect(self.icon_only_widget.setVisible)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1168,12 +1172,7 @@ class Ui_MainWindow(object):
         self.filterGender_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"F\u00e9minin", None))
         self.filterGender_comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Masculin", None))
 
-        self.filterClass_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Selectionner la classe", None))
-        self.filterClass_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"ESCO 1", None))
-        self.filterClass_comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"ESCO 2", None))
-        self.filterClass_comboBox.setItemText(3, QCoreApplication.translate("MainWindow", u"ATELIER 1", None))
-        self.filterClass_comboBox.setItemText(4, QCoreApplication.translate("MainWindow", u"ATELIER 2", None))
-        self.filterClass_comboBox.setItemText(5, QCoreApplication.translate("MainWindow", u"COME 1", None))
+        self.filterClass_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Selectionner le sexe", None))
 
         self.searchStudent_lineEdit.setText("")
         self.searchStudent_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Rechercher ici...", None))
@@ -1197,28 +1196,8 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Contact", None));
         ___qtablewidgetitem9 = self.tableWidget.horizontalHeaderItem(9)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Actions", None));
-        ___qtablewidgetitem10 = self.tableWidget_2.horizontalHeaderItem(0)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Matricule", None));
-        ___qtablewidgetitem11 = self.tableWidget_2.horizontalHeaderItem(1)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"Nom", None));
-        ___qtablewidgetitem12 = self.tableWidget_2.horizontalHeaderItem(2)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e9noms", None));
-        ___qtablewidgetitem13 = self.tableWidget_2.horizontalHeaderItem(3)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Sexe", None));
-        ___qtablewidgetitem14 = self.tableWidget_2.horizontalHeaderItem(4)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Classe", None));
-        ___qtablewidgetitem15 = self.tableWidget_2.horizontalHeaderItem(5)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Raison", None));
-        ___qtablewidgetitem16 = self.tableWidget_2.horizontalHeaderItem(6)
-        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Montant vers\u00e9", None));
-        ___qtablewidgetitem17 = self.tableWidget_2.horizontalHeaderItem(7)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Date de versement", None));
-        ___qtablewidgetitem18 = self.tableWidget_2.horizontalHeaderItem(8)
-        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Solde", None));
-        ___qtablewidgetitem19 = self.tableWidget_2.horizontalHeaderItem(9)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Reste", None));
-        ___qtablewidgetitem20 = self.tableWidget_2.horizontalHeaderItem(10)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Actions", None));
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Paiements Apprenants", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Ceci est la page pour enregistrer les paiements des apprenants et generer les recus", None))
         self.addPayeOldStudentBtn.setText(QCoreApplication.translate("MainWindow", u"Enregistrer un paiement (Ancien)", None))
         self.addPayeNewStudentBtn_2.setText(QCoreApplication.translate("MainWindow", u"Enregistrer un paiement (Nouveau)", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Filtr\u00e9 par :", None))
@@ -1227,16 +1206,33 @@ class Ui_MainWindow(object):
         self.filterGender_comboBox_2.setItemText(2, QCoreApplication.translate("MainWindow", u"Masculin", None))
 
         self.filterClass_comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"Selectionner la classe", None))
-        self.filterClass_comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"ESCO 1", None))
-        self.filterClass_comboBox_2.setItemText(2, QCoreApplication.translate("MainWindow", u"ESCO 2", None))
-        self.filterClass_comboBox_2.setItemText(3, QCoreApplication.translate("MainWindow", u"ATELIER 1", None))
-        self.filterClass_comboBox_2.setItemText(4, QCoreApplication.translate("MainWindow", u"ATELIER 2", None))
-        self.filterClass_comboBox_2.setItemText(5, QCoreApplication.translate("MainWindow", u"COME 1", None))
 
         self.searchStudent_lineEdit_2.setText("")
         self.searchStudent_lineEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Rechercher ici...", None))
-        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Paiements Apprenants", None))
-        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Ceci est la page pour enregistrer les paiements des apprenants et generer les recus", None))
+        ___qtablewidgetitem10 = self.tableWidget_2.horizontalHeaderItem(0)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"id", None));
+        ___qtablewidgetitem11 = self.tableWidget_2.horizontalHeaderItem(1)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"Matricule", None));
+        ___qtablewidgetitem12 = self.tableWidget_2.horizontalHeaderItem(2)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"Nom", None));
+        ___qtablewidgetitem13 = self.tableWidget_2.horizontalHeaderItem(3)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e9noms", None));
+        ___qtablewidgetitem14 = self.tableWidget_2.horizontalHeaderItem(4)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Sexe", None));
+        ___qtablewidgetitem15 = self.tableWidget_2.horizontalHeaderItem(5)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Classe", None));
+        ___qtablewidgetitem16 = self.tableWidget_2.horizontalHeaderItem(6)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Raison", None));
+        ___qtablewidgetitem17 = self.tableWidget_2.horizontalHeaderItem(7)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Montant vers\u00e9", None));
+        ___qtablewidgetitem18 = self.tableWidget_2.horizontalHeaderItem(8)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Date de versement", None));
+        ___qtablewidgetitem19 = self.tableWidget_2.horizontalHeaderItem(9)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Solde", None));
+        ___qtablewidgetitem20 = self.tableWidget_2.horizontalHeaderItem(10)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Reste", None));
+        ___qtablewidgetitem21 = self.tableWidget_2.horizontalHeaderItem(11)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Actions", None));
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Transactions Apprenants", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Informations Enseignants", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Salaires Enseignants", None))

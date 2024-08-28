@@ -38,6 +38,14 @@ def get_all_students():
     conn.close()
     return rows
 
+def get_all_etudes():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id_niveau, id_filiere FROM etude")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
 def delete_student(matricule):
     """Supprime un étudiant de la base de données par matricule."""
     conn = get_connection()
@@ -161,6 +169,65 @@ def get_student_by_matricule(matricule):
     else:
         return None  # Retourne None si l'étudiant n'est pas trouvé
     
+def get_students_from_db():
+    # Connexion à la base de données
+    conn = sqlite3.connect('data/zani_db.db')
+    cursor = conn.cursor()
+    
+    # Requête SQL pour obtenir les données des étudiants
+    query = "SELECT matricule, nom, prenom FROM students"
+    cursor.execute(query)
+    
+    # Récupération des résultats
+    rows = cursor.fetchall()
+    
+    # Fermeture de la connexion
+    conn.close()
+    
+    # Formatage des résultats en liste de dictionnaires
+    students = [
+        {"matricule": row[0], "nom": row[1], "prenom": row[2]}
+        for row in rows
+    ]
+    
+    return students
+
+def get_etude_id_by_matricule(matricule):
+    """Récupère l'ID de l'étude d'un étudiant à partir de son matricule."""
+    conn = sqlite3.connect('data/zani_db.db')
+    cursor = conn.cursor()
+
+    # Récupération de l'information option_et_niveau de l'étudiant
+    query = "SELECT option_et_niveau FROM students WHERE matricule = ?"
+    cursor.execute(query, (matricule,))
+    result = cursor.fetchone()
+    
+    if result:
+        option_et_niveau = result[0]
+        try:
+            # Supposons que option_et_niveau soit sous la forme "id_filiere id_niveau"
+            id_filiere, id_niveau = option_et_niveau.split()
+
+            # Requête pour récupérer l'ID de l'étude
+            query = "SELECT id_etude FROM etude WHERE id_filiere = ? AND id_niveau = ?"
+            cursor.execute(query, (id_filiere, id_niveau))
+            etude_id = cursor.fetchone()
+            
+            conn.close()
+            
+            if etude_id:
+                return etude_id[0]  # Retourne l'ID de l'étude
+            else:
+                print("Aucune étude trouvée pour les données fournies.")
+                return None
+        except ValueError:
+            print("Erreur de format dans option_et_niveau.")
+            return None
+    else:
+        conn.close()
+        print("Aucun étudiant trouvé avec ce matricule.")
+        return None
+    
 
 #Enregistrer le paiment d'un etudiant dans la bd
 def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
@@ -209,13 +276,43 @@ def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scola
     
     if not result:
         print("Dossier non trouvé.")
-        return
+         # Créer le nouveau dossier
+        cursor.execute("""
+            INSERT INTO dossier (id_eleve, id_scolarite, id_etude)
+            VALUES (?, ?, ?)
+        """, (matricule, annee_scolarite_id, get_etude_id_by_matricule(matricule)))
+        conn.commit()
+        print("Nouveau dossier créé avec succès.")
+
+      # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
+        cursor.execute("""
+        SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
+        FROM dossier d
+        JOIN students s ON d.id_eleve = s.matricule
+        JOIN etude e ON d.id_etude = e.id_etude
+        LEFT JOIN recu r ON d.id_dossier = r.id_dossier
+        WHERE s.matricule = ? AND d.id_scolarite = ?
+    """, (matricule, annee_scolarite_id))
+    
+        result = cursor.fetchone()
 
     id_dossier, frais_scolaire, solde, nom, prenom, date_naissance, lieu_naissance, option_et_niveau= result
 
     # Calculer le nouveau solde et le montant restant
-    nouveau_solde = (solde or 0) + montant_verse
-    montant_restant = frais_scolaire - nouveau_solde
+    id_dossier1 = id_dossier
+    cursor.execute("""
+            SELECT montant_restant FROM recu WHERE id_dossier = ? ORDER BY id_recu DESC LIMIT 1;
+        """, (id_dossier1,))
+    result1 = cursor.fetchone()
+
+    if result1 :
+        montant_restant = result1[0]
+        montant_restant = montant_restant - montant_verse
+        nouveau_solde = frais_scolaire - montant_restant
+    else:
+        montant_restant = frais_scolaire - montant_verse
+        nouveau_solde = frais_scolaire - montant_restant
+        
 
     # Insérer le nouveau reçu dans la base de données
     cursor.execute("""
