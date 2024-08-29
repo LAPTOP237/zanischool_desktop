@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QDialog, QLineEdit, QPushButton, QVBoxLayout, QLab
 from PySide6.QtCore import Qt
 import sqlite3
 
+db = 'zani_db.db'
 class LoginPage(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -32,7 +33,7 @@ class LoginPage(QDialog):
         username = self.username_lineEdit.text()
         password = self.password_lineEdit.text()
         
-        conn = sqlite3.connect('data/zani_db.db')
+        conn = sqlite3.connect('db')
         cursor = conn.cursor()
         cursor.execute("SELECT role FROM users WHERE username = ? AND password = ?", (username, password))
         result = cursor.fetchone()

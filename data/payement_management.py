@@ -1,7 +1,9 @@
 import sqlite3
 
+db = 'zani_db.db'
+
 def get_all_payments():
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     cursor.execute('''
@@ -15,7 +17,7 @@ def get_all_payments():
     return payments
 
 def filter_payments(gender=None, class_option=None):
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     query = '''
@@ -40,7 +42,7 @@ def filter_payments(gender=None, class_option=None):
     return payments
 
 def search_payments(keyword):
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     query = '''
@@ -57,7 +59,7 @@ def search_payments(keyword):
     return payments
 
 def get_payment_by_matricule(matricule):
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     query = '''
@@ -73,7 +75,7 @@ def get_payment_by_matricule(matricule):
     return payment
 
 def delete_payment(payment_id):
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     query = 'DELETE FROM recu WHERE id_recu = ?'

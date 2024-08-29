@@ -6,9 +6,11 @@ from data.recu_paye_student import generate_receipt_pdf
 import os
 import ctypes
 
+db = 'zani_db.db'
+
 def get_connection():
     """Retourne une connexion à la base de données."""
-    return sqlite3.connect('data/zani_db.db')
+    return sqlite3.connect(db)
 
 def initialize_db():
     """Initialise la base de données et crée les tables si elles n'existent pas."""
@@ -93,7 +95,7 @@ def filter_students(gender_filter=None, class_filter=None):
 def generate_matricule(sexe):
     current_year = datetime.now().strftime("%Y")
     prefix = 'F' if sexe == 'Féminin' else 'M'  # Utiliser 'M' pour Masculin
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     # Trouver le dernier matricule de l'année en cours
@@ -139,7 +141,7 @@ def update_student(matricule, nom, prenom, sexe, option_et_niveau, date_naissanc
 # def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
 #     matricule = generate_matricule(sexe)
     
-#     conn = sqlite3.connect('data/zani_db.db')
+#     conn = sqlite3.connect(db)
 #     cursor = conn.cursor()
     
 #     cursor.execute('''
@@ -155,7 +157,7 @@ def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu
     matricule = generate_matricule(sexe)
     
     try:
-        conn = sqlite3.connect('data/zani_db.db')
+        conn = sqlite3.connect(db)
         cursor = conn.cursor()
         
         cursor.execute('''
@@ -174,7 +176,7 @@ def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu
 
 def get_student_by_matricule(matricule):
     """Récupère les données d'un étudiant à partir de son matricule."""
-    conn = sqlite3.connect('data/zani_db.db')  
+    conn = sqlite3.connect(db)  
     cursor = conn.cursor()
     
     query = "SELECT * FROM students WHERE matricule = ?"
@@ -196,7 +198,7 @@ def get_student_by_matricule(matricule):
     
 def get_students_from_db():
     # Connexion à la base de données
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     # Requête SQL pour obtenir les données des étudiants
@@ -219,7 +221,7 @@ def get_students_from_db():
 
 def get_etude_id_by_matricule(matricule):
     """Récupère l'ID de l'étude d'un étudiant à partir de son matricule."""
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
     # Récupération de l'information option_et_niveau de l'étudiant
@@ -257,7 +259,7 @@ def get_etude_id_by_matricule(matricule):
 #Enregistrer le paiment d'un etudiant dans la bd
 # def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
     
-#     conn = sqlite3.connect('data/zani_db.db')
+#     conn = sqlite3.connect(db)
 #     cursor = conn.cursor()
 
 #     datedeb, datefin = parse_annee_scolaire(annee_scolaire)
@@ -355,7 +357,7 @@ def get_etude_id_by_matricule(matricule):
 #     print("Paiement enregistré avec succès.")
 
 def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     datedeb, datefin = parse_annee_scolaire(annee_scolaire)
@@ -458,7 +460,7 @@ def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scola
 #Creer un new dossier etudiant
 def create_new_dossier(matricule, debut_annee, fin_annee, niveau, filiere):
     # Connexion à la base de données
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     # Vérifier si l'année scolaire existe déjà, sinon la créer

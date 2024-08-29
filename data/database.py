@@ -1,7 +1,9 @@
 import sqlite3
 
+db = 'zani_db.db'
+
 def initialize_db():
-    conn = sqlite3.connect('data/zani_db.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
     # Créer la table students si elle n'existe pas

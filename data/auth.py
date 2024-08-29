@@ -1,7 +1,9 @@
 import sqlite3
 
+db = 'zani_db.db'
+
 def initialize_users():
-    conn = sqlite3.connect('data/zani_db.db')  # Remplacez par le chemin de votre DB
+    conn = sqlite3.connect(db)  # Remplacez par le chemin de votre DB
     cursor = conn.cursor()
     
    # Vérifier si la table est vide

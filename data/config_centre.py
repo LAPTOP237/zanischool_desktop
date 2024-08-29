@@ -1,6 +1,6 @@
 import sqlite3
 
-db = 'data/zani_db.db'
+db = 'zani_db.db'
 
 def create_filiere(sigle, valeur):
     conn = sqlite3.connect(db)
