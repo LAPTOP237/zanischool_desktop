@@ -448,7 +448,7 @@ def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scola
         # if os.path.isfile(pdf_path):
         #     os.startfile(pdf_path, 'print')
         
-        return "Le paiement a été enregistré avec succès et le reçu est enregistré dans Documents/Recus et s'ouvrira automatiquement pour l'impression."
+        return "Le paiement a été enregistré avec succès s'ouvrira automatiquement pour l'impression."
     
     except Exception as e:
         print(f"Erreur: {e}")

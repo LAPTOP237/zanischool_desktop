@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QFrame,
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -641,8 +641,8 @@ class Ui_MainWindow(object):
         self.main_screen_widget.setMaximumSize(QSize(16777215, 16777215))
         self.main_screen_widget.setStyleSheet(u"border-radius:3px;\n"
 "background-color: rgb(243, 243, 243);")
-        self.verticalLayout_15 = QVBoxLayout(self.main_screen_widget)
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.gridLayout_7 = QGridLayout(self.main_screen_widget)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.stackedWidget = QStackedWidget(self.main_screen_widget)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.page = QWidget()
@@ -871,32 +871,30 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
-        self.gridLayout_2 = QGridLayout(self.page_4)
+        self.verticalLayout_14 = QVBoxLayout(self.page_4)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.verticalLayout_16 = QVBoxLayout()
-        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.label_10 = QLabel(self.page_4)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setFont(font4)
 
-        self.verticalLayout_16.addWidget(self.label_10)
+        self.gridLayout_2.addWidget(self.label_10, 0, 0, 1, 1)
 
         self.label_20 = QLabel(self.page_4)
         self.label_20.setObjectName(u"label_20")
         self.label_20.setFont(font2)
 
-        self.verticalLayout_16.addWidget(self.label_20)
+        self.gridLayout_2.addWidget(self.label_20, 1, 0, 1, 1)
 
 
-        self.gridLayout_2.addLayout(self.verticalLayout_16, 0, 0, 1, 1)
+        self.verticalLayout_14.addLayout(self.gridLayout_2)
 
-        self.horizontalLayout_14 = QHBoxLayout()
-        self.horizontalLayout_14.setSpacing(20)
-        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.addPayeOldStudentBtn = QPushButton(self.page_4)
         self.addPayeOldStudentBtn.setObjectName(u"addPayeOldStudentBtn")
-        self.addPayeOldStudentBtn.setMinimumSize(QSize(200, 35))
+        self.addPayeOldStudentBtn.setMinimumSize(QSize(230, 35))
         self.addPayeOldStudentBtn.setMaximumSize(QSize(285, 16777215))
         self.addPayeOldStudentBtn.setFont(font5)
         self.addPayeOldStudentBtn.setStyleSheet(u"QPushButton{\n"
@@ -909,14 +907,31 @@ class Ui_MainWindow(object):
 "}")
         self.addPayeOldStudentBtn.setIcon(icon16)
 
-        self.horizontalLayout_14.addWidget(self.addPayeOldStudentBtn)
+        self.horizontalLayout_6.addWidget(self.addPayeOldStudentBtn)
 
-        self.addPayeNewStudentBtn_2 = QPushButton(self.page_4)
-        self.addPayeNewStudentBtn_2.setObjectName(u"addPayeNewStudentBtn_2")
-        self.addPayeNewStudentBtn_2.setMinimumSize(QSize(200, 35))
-        self.addPayeNewStudentBtn_2.setMaximumSize(QSize(300, 16777215))
-        self.addPayeNewStudentBtn_2.setFont(font5)
-        self.addPayeNewStudentBtn_2.setStyleSheet(u"QPushButton{\n"
+        self.exportPDF_btn_2 = QPushButton(self.page_4)
+        self.exportPDF_btn_2.setObjectName(u"exportPDF_btn_2")
+        self.exportPDF_btn_2.setMinimumSize(QSize(200, 35))
+        self.exportPDF_btn_2.setMaximumSize(QSize(285, 16777215))
+        self.exportPDF_btn_2.setFont(font5)
+        self.exportPDF_btn_2.setStyleSheet(u"QPushButton{\n"
+"color:white;\n"
+"border:none;\n"
+"border-radius:8px;\n"
+"font-size:15px;\n"
+"	background-color: rgb(61, 48, 162);\n"
+"font-weight:bold;\n"
+"}")
+        self.exportPDF_btn_2.setIcon(icon17)
+
+        self.horizontalLayout_6.addWidget(self.exportPDF_btn_2)
+
+        self.exportExcel_btn_2 = QPushButton(self.page_4)
+        self.exportExcel_btn_2.setObjectName(u"exportExcel_btn_2")
+        self.exportExcel_btn_2.setMinimumSize(QSize(200, 35))
+        self.exportExcel_btn_2.setMaximumSize(QSize(285, 16777215))
+        self.exportExcel_btn_2.setFont(font5)
+        self.exportExcel_btn_2.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
 "border-radius:8px;\n"
@@ -924,24 +939,25 @@ class Ui_MainWindow(object):
 "	background-color: rgb(187, 187, 187);\n"
 "font-weight:bold;\n"
 "}")
-        icon19 = QIcon()
-        icon19.addFile(u":/icons/fianances1.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.addPayeNewStudentBtn_2.setIcon(icon19)
+        self.exportExcel_btn_2.setIcon(icon18)
 
-        self.horizontalLayout_14.addWidget(self.addPayeNewStudentBtn_2)
+        self.horizontalLayout_6.addWidget(self.exportExcel_btn_2)
+
+        self.horizontalSpacer_6 = QSpacerItem(178, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_6)
 
 
-        self.gridLayout_2.addLayout(self.horizontalLayout_14, 1, 0, 1, 1)
+        self.verticalLayout_14.addLayout(self.horizontalLayout_6)
 
-        self.horizontalLayout_12 = QHBoxLayout()
-        self.horizontalLayout_12.setSpacing(15)
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.gridLayout_6 = QGridLayout()
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.label_23 = QLabel(self.page_4)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMaximumSize(QSize(70, 16777215))
         self.label_23.setFont(font6)
 
-        self.horizontalLayout_12.addWidget(self.label_23)
+        self.gridLayout_6.addWidget(self.label_23, 0, 0, 1, 1)
 
         self.filterGender_comboBox_2 = QComboBox(self.page_4)
         self.filterGender_comboBox_2.addItem("")
@@ -960,7 +976,7 @@ class Ui_MainWindow(object):
 "font-weight:bold;\n"
 "}")
 
-        self.horizontalLayout_12.addWidget(self.filterGender_comboBox_2)
+        self.gridLayout_6.addWidget(self.filterGender_comboBox_2, 0, 1, 1, 1)
 
         self.filterClass_comboBox_2 = QComboBox(self.page_4)
         self.filterClass_comboBox_2.addItem("")
@@ -977,11 +993,27 @@ class Ui_MainWindow(object):
 "font-weight:bold;\n"
 "}")
 
-        self.horizontalLayout_12.addWidget(self.filterClass_comboBox_2)
+        self.gridLayout_6.addWidget(self.filterClass_comboBox_2, 0, 2, 1, 1)
+
+        self.filterDate_dateEdit = QDateEdit(self.page_4)
+        self.filterDate_dateEdit.setObjectName(u"filterDate_dateEdit")
+        self.filterDate_dateEdit.setMinimumSize(QSize(130, 0))
+        self.filterDate_dateEdit.setStyleSheet(u"QDateEdit{\n"
+"border: 1px solid gray;\n"
+"border-radius: 5px;\n"
+"height:35px;\n"
+"padding-left:15px;\n"
+"color:white;\n"
+"background-color: black;\n"
+"selection-background-color: rgb(176, 94, 255);\n"
+"font-weight:bold;\n"
+"}")
+
+        self.gridLayout_6.addWidget(self.filterDate_dateEdit, 0, 3, 1, 1)
 
         self.searchStudent_lineEdit_2 = QLineEdit(self.page_4)
         self.searchStudent_lineEdit_2.setObjectName(u"searchStudent_lineEdit_2")
-        self.searchStudent_lineEdit_2.setMinimumSize(QSize(300, 0))
+        self.searchStudent_lineEdit_2.setMinimumSize(QSize(200, 0))
         self.searchStudent_lineEdit_2.setMaximumSize(QSize(16777215, 31))
         self.searchStudent_lineEdit_2.setFont(font3)
         self.searchStudent_lineEdit_2.setStyleSheet(u"QLineEdit{\n"
@@ -991,10 +1023,10 @@ class Ui_MainWindow(object):
 "    \n"
 "}")
 
-        self.horizontalLayout_12.addWidget(self.searchStudent_lineEdit_2)
+        self.gridLayout_6.addWidget(self.searchStudent_lineEdit_2, 0, 4, 1, 1)
 
 
-        self.gridLayout_2.addLayout(self.horizontalLayout_12, 2, 0, 1, 1)
+        self.verticalLayout_14.addLayout(self.gridLayout_6)
 
         self.tableWidget_2 = QTableWidget(self.page_4)
         if (self.tableWidget_2.columnCount() < 12):
@@ -1030,7 +1062,7 @@ class Ui_MainWindow(object):
 "background-color:black;\n"
 "color:white;}")
 
-        self.gridLayout_2.addWidget(self.tableWidget_2, 3, 0, 1, 1)
+        self.verticalLayout_14.addWidget(self.tableWidget_2)
 
         self.stackedWidget.addWidget(self.page_4)
         self.page_5 = QWidget()
@@ -1090,7 +1122,7 @@ class Ui_MainWindow(object):
         self.label_18.setFont(font4)
         self.stackedWidget.addWidget(self.page_12)
 
-        self.verticalLayout_15.addWidget(self.stackedWidget)
+        self.gridLayout_7.addWidget(self.stackedWidget, 0, 0, 1, 1)
 
 
         self.gridLayout_5.addWidget(self.main_screen_widget, 1, 0, 1, 1)
@@ -1120,7 +1152,7 @@ class Ui_MainWindow(object):
         self.menu_burger.toggled.connect(self.icon_text_widget.setHidden)
         self.menu_burger.toggled.connect(self.icon_only_widget.setVisible)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1198,8 +1230,9 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Actions", None));
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Paiements Apprenants", None))
         self.label_20.setText(QCoreApplication.translate("MainWindow", u"Ceci est la page pour enregistrer les paiements des apprenants et generer les recus", None))
-        self.addPayeOldStudentBtn.setText(QCoreApplication.translate("MainWindow", u"Enregistrer un paiement (Ancien)", None))
-        self.addPayeNewStudentBtn_2.setText(QCoreApplication.translate("MainWindow", u"Enregistrer un paiement (Nouveau)", None))
+        self.addPayeOldStudentBtn.setText(QCoreApplication.translate("MainWindow", u"Enregistrer un paiement", None))
+        self.exportPDF_btn_2.setText(QCoreApplication.translate("MainWindow", u"Exporter le PDF", None))
+        self.exportExcel_btn_2.setText(QCoreApplication.translate("MainWindow", u"Exporter Excel", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Filtr\u00e9 par :", None))
         self.filterGender_comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"Selectionner le sexe", None))
         self.filterGender_comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"F\u00e9minin", None))

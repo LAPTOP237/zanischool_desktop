@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QTableWidgetItem, QPushButton, QWidget, QMainWindow, QHBoxLayout,QMenu,QMessageBox
 from PySide6.QtGui import QAction
 from PySide6.QtGui import QIcon
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QDate
 from StudentPage import StudentPage
 from StudentPayePage import StudentPayePage
 from ui_index import Ui_MainWindow
@@ -78,14 +78,33 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         self.addPayeOldStudentBtn.clicked.connect(self.open_student_payement_dialog)
 
-        #connecter mes buttons pour les filtre
+        #connecter mes buttons pour les filtres
         self.filterGender_comboBox.currentIndexChanged.connect(self.apply_filters)
         self.filterClass_comboBox.currentIndexChanged.connect(self.apply_filters)
         self.searchStudent_lineEdit.textChanged.connect(self.apply_search)
 
-        # Configuration des boutons pour exportations
+        self.filterGender_comboBox_2.currentIndexChanged.connect(self.apply_payment_filters)
+        self.filterClass_comboBox_2.currentIndexChanged.connect(self.apply_payment_filters)
+        self.filterDate_dateEdit.dateChanged.connect(self.apply_payment_filters)
+        self.searchStudent_lineEdit_2.textChanged.connect(self.apply_payment_search)
+        
+
+        # Dans la configuration de votre widget
+        # self.filterDate_dateEdit.clear()  # Efface toute date par défaut
+        # self.filterDate_dateEdit.setCalendarPopup(True) 
+
+        # Dans la configuration de votre widget
+        self.default_date = QDate(2000, 1, 1)
+        self.filterDate_dateEdit.setDate(self.default_date)
+        
+        # Configuration des boutons pour exportations apprenants
         self.exportPDF_btn.clicked.connect(self.on_export_pdf)
         self.exportExcel_btn.clicked.connect(self.on_export_excel)
+
+        # Configuration des boutons pour exportations paiements
+        self.exportPDF_btn_2.clicked.connect(self.on_export_pdf_paye)
+        self.exportExcel_btn_2.clicked.connect(self.on_export_excel_paye)
+
         self.export_manager = ExportManager(self)
         
         self.load_combo_box_items() #Pour gerer les items de mon combox de mes classes
@@ -361,6 +380,37 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
             return data
     ##Fin Exportation du table etudiant
+    
+
+    ##exportation paiement
+    def on_export_pdf_paye(self):
+            """Handler pour le bouton d'exportation en PDF."""
+            payement_data = self.get_table_data_paye()
+            self.export_manager.export_to_pdf_payement(payement_data)
+
+    def on_export_excel_paye(self):
+            """Handler pour le bouton d'exportation en Excel."""
+            payement_data = self.get_table_data_paye()
+            self.export_manager.export_to_excel_payement(payement_data)
+
+    def get_table_data_paye(self):
+        """Récupère les données du QTableWidget filtré."""
+        data = []
+        rows = self.tableWidget_2.rowCount()
+        columns = self.tableWidget_2.columnCount()
+
+        for row in range(rows):
+            row_data = {}
+            for col in range(columns):
+                item = self.tableWidget_2.item(row, col)
+                if item is not None:
+                    row_data[self.tableWidget_2.horizontalHeaderItem(col).text()] = item.text()
+            data.append(row_data)
+
+        return data
+
+
+    #Fin exportation
 
 
     ## La page des listes des paiements
@@ -444,22 +494,30 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
     def apply_payment_filters(self):
         # Appliquer les filtres en fonction des critères
-        # Exemple : filtre par sexe et classe
         gender_filter = self.filterGender_comboBox_2.currentText()
         class_filter = self.filterClass_comboBox_2.currentText()
+        date_filter = self.filterDate_dateEdit.date().toString("yyyy-MM-dd")  # Récupérer la date sélectionnée
 
         if gender_filter == "Selectionner le sexe":
             gender_filter = None
         if class_filter == "Selectionner la classe":
             class_filter = None
+        if not self.filterDate_dateEdit.date():  # Si aucune date n'est sélectionnée, on ne filtre pas par date
+            date_filter = None
+
+                # Dans votre fonction apply_payment_filters, vérifiez la date
+        if self.filterDate_dateEdit.date() == self.default_date :
+            date_filter = None  # Traitez comme si aucune date n'est sélectionnée
+        else:
+            date_filter = self.filterDate_dateEdit.date().toString("yyyy-MM-dd")
         
-        payments = filter_payments(gender_filter, class_filter)  # Implémentez cette fonction
+        payments = filter_payments(gender_filter, class_filter, date_filter)  # Passez date_filter comme argument
         self.tableWidget_2.setRowCount(0)
         for row_index, row in enumerate(payments):
             self.tableWidget_2.insertRow(row_index)
             for col_index, item in enumerate(row):  # Inclure toutes les colonnes ici
                 self.tableWidget_2.setItem(row_index, col_index, QTableWidgetItem(str(item)))
-            
+
             # Ajouter des boutons d'action stylisés   
             self.add_payment_actions_buttons(row_index)
 
