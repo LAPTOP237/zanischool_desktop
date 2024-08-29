@@ -6,6 +6,7 @@ def initialize_db():
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
     
+    print("Creating tables...")
     # Créer la table students si elle n'existe pas
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS students (

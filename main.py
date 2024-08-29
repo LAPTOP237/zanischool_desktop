@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
         # Initialiser la base de données
         initialize_db()
         initialize_users()
-        initialize_centre()
+        #initialize_centre()
         
         self.login_page = LoginPage(self)
         if self.login_page.exec() == QDialog.Accepted:
