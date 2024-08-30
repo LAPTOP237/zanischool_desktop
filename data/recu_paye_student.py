@@ -14,7 +14,7 @@ class PDF(FPDF):
         self.image('icons/logo_centre.png', 5, y_start, 25, 14)  # Ajustez le chemin et les dimensions
         
         # Logo de Zanischool à droite
-       # self.image('icons/logo_zanischool.png', 185, y_start, 14, 14)  # Ajustez le chemin et les dimensions
+        self.image('icons/logo_mc.png', 185, y_start, 14, 14)  # Ajustez le chemin et les dimensions
         
         self.set_xy(35,y_start)
         self.set_font('Arial', 'B', 16)

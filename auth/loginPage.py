@@ -8,17 +8,19 @@ db = 'zani_db.db'
 class LoginPage(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle('Connexion à ZaniSchool')
+        self.setWindowTitle('Connexion à Mon Compagnon Scolaire')
         self.setFixedSize(500, 300)  # Augmenter la taille pour accueillir le logo et le formulaire
         
         # Logo et message de bienvenue
         self.logo_label = QLabel(self)
-        self.logo_pixmap = QPixmap('icons/logo_zanischool.png').scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.logo_pixmap = QPixmap('icons/logo_mc.png').scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.logo_label.setPixmap(self.logo_pixmap)
         
         self.welcome_label = QLabel('Heureux de vous revoir!', self)
         self.welcome_label.setAlignment(Qt.AlignCenter)
-        self.welcome_label.setStyleSheet("font-size: 16px; font-weight: bold; color: #000;")
+        self.welcome_label.setStyleSheet("font-size: 16px; font-weight: bold; color: #000;padding:0px; margin:0px")
+        self.welcome_label.setFixedWidth(250)  # Ajuster la largeur
+        self.welcome_label.setFixedHeight(50)  # Ajuster la hauteur
         
         # Formulaire de connexion
         self.username_lineEdit = QLineEdit(self)
@@ -52,7 +54,7 @@ class LoginPage(QDialog):
         
         self.login_button = QPushButton('Se connecter', self)
         self.login_button.clicked.connect(self.check_credentials)
-        self.login_button.setFixedWidth(200)  # Ajuster la largeur
+        self.login_button.setFixedWidth(250)  # Ajuster la largeur
         self.login_button.setFixedHeight(35)  # Ajuster la hauteur
 
         self.login_button.setStyleSheet("""
@@ -76,9 +78,9 @@ class LoginPage(QDialog):
         # Layouts pour l'organisation des widgets
         left_layout = QVBoxLayout()
         left_layout.addWidget(self.logo_label)
-        left_layout.addWidget(self.welcome_label)
         
         form_layout = QVBoxLayout()
+        form_layout.addWidget(self.welcome_label)
         form_layout.addWidget(self.username_lineEdit)
         form_layout.addWidget(self.password_lineEdit)
         form_layout.addWidget(self.login_button)

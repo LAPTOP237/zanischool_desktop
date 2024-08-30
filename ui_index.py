@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1281, 882)
         icon = QIcon()
-        icon.addFile(u":/icons/logo_zanischool.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/logo_mc.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
         self.label_7 = QLabel(self.icon_only_widget)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setMaximumSize(QSize(40, 40))
-        self.label_7.setPixmap(QPixmap(u":/icons/logo_zanischool.png"))
+        self.label_7.setPixmap(QPixmap(u":/icons/logo_mc2.png"))
         self.label_7.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.label_7)
@@ -211,7 +211,7 @@ class Ui_MainWindow(object):
         self.label_2 = QLabel(self.icon_text_widget)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setMaximumSize(QSize(40, 40))
-        self.label_2.setPixmap(QPixmap(u":/icons/logo_zanischool.png"))
+        self.label_2.setPixmap(QPixmap(u":/icons/logo_mc2.png"))
         self.label_2.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.label_2)
@@ -647,20 +647,70 @@ class Ui_MainWindow(object):
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.page = QWidget()
         self.page.setObjectName(u"page")
-        self.label = QLabel(self.page)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(10, 0, 271, 31))
+        self.verticalLayout_16 = QVBoxLayout(self.page)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.horizontalLayout_11 = QHBoxLayout()
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.label_24 = QLabel(self.page)
+        self.label_24.setObjectName(u"label_24")
+        self.label_24.setMinimumSize(QSize(700, 51))
+        self.label_24.setMaximumSize(QSize(700, 71))
         font4 = QFont()
         font4.setFamilies([u"Montserrat SemiBold"])
-        font4.setPointSize(14)
-        self.label.setFont(font4)
+        font4.setPointSize(20)
+        font4.setBold(True)
+        self.label_24.setFont(font4)
+
+        self.horizontalLayout_11.addWidget(self.label_24)
+
+        self.horizontalSpacer_7 = QSpacerItem(24, 128, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_11.addItem(self.horizontalSpacer_7)
+
+        self.label_21 = QLabel(self.page)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setMinimumSize(QSize(111, 131))
+        self.label_21.setMaximumSize(QSize(111, 131))
+        self.label_21.setPixmap(QPixmap(u":/icons/logo_mc.png"))
+        self.label_21.setScaledContents(True)
+
+        self.horizontalLayout_11.addWidget(self.label_21)
+
+
+        self.verticalLayout_16.addLayout(self.horizontalLayout_11)
+
+        self.verticalLayout_15 = QVBoxLayout()
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.verticalSpacer_3 = QSpacerItem(20, 28, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_15.addItem(self.verticalSpacer_3)
+
+        self.label = QLabel(self.page)
+        self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(850, 550))
+        self.label.setPixmap(QPixmap(u":/icons/logo_mc2.png"))
+        self.label.setScaledContents(False)
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_15.addWidget(self.label)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 28, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_15.addItem(self.verticalSpacer_4)
+
+
+        self.verticalLayout_16.addLayout(self.verticalLayout_15)
+
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
         self.label_8 = QLabel(self.page_2)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(10, 0, 271, 31))
-        self.label_8.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"Montserrat SemiBold"])
+        font5.setPointSize(14)
+        self.label_8.setFont(font5)
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
@@ -673,7 +723,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.label_9 = QLabel(self.page_3)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font4)
+        self.label_9.setFont(font5)
 
         self.verticalLayout_17.addWidget(self.label_9)
 
@@ -696,9 +746,9 @@ class Ui_MainWindow(object):
         self.addStudentBtn.setObjectName(u"addStudentBtn")
         self.addStudentBtn.setMinimumSize(QSize(200, 35))
         self.addStudentBtn.setMaximumSize(QSize(285, 16777215))
-        font5 = QFont()
-        font5.setBold(True)
-        self.addStudentBtn.setFont(font5)
+        font6 = QFont()
+        font6.setBold(True)
+        self.addStudentBtn.setFont(font6)
         self.addStudentBtn.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
@@ -717,7 +767,7 @@ class Ui_MainWindow(object):
         self.exportPDF_btn.setObjectName(u"exportPDF_btn")
         self.exportPDF_btn.setMinimumSize(QSize(200, 35))
         self.exportPDF_btn.setMaximumSize(QSize(285, 16777215))
-        self.exportPDF_btn.setFont(font5)
+        self.exportPDF_btn.setFont(font6)
         self.exportPDF_btn.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
@@ -736,7 +786,7 @@ class Ui_MainWindow(object):
         self.exportExcel_btn.setObjectName(u"exportExcel_btn")
         self.exportExcel_btn.setMinimumSize(QSize(200, 35))
         self.exportExcel_btn.setMaximumSize(QSize(285, 16777215))
-        self.exportExcel_btn.setFont(font5)
+        self.exportExcel_btn.setFont(font6)
         self.exportExcel_btn.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
@@ -769,10 +819,10 @@ class Ui_MainWindow(object):
         self.label_22 = QLabel(self.page_3)
         self.label_22.setObjectName(u"label_22")
         self.label_22.setMaximumSize(QSize(70, 16777215))
-        font6 = QFont()
-        font6.setPointSize(8)
-        font6.setBold(True)
-        self.label_22.setFont(font6)
+        font7 = QFont()
+        font7.setPointSize(8)
+        font7.setBold(True)
+        self.label_22.setFont(font7)
 
         self.horizontalLayout_8.addWidget(self.label_22)
 
@@ -877,7 +927,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label_10 = QLabel(self.page_4)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setFont(font4)
+        self.label_10.setFont(font5)
 
         self.gridLayout_2.addWidget(self.label_10, 0, 0, 1, 1)
 
@@ -896,7 +946,7 @@ class Ui_MainWindow(object):
         self.addPayeOldStudentBtn.setObjectName(u"addPayeOldStudentBtn")
         self.addPayeOldStudentBtn.setMinimumSize(QSize(230, 35))
         self.addPayeOldStudentBtn.setMaximumSize(QSize(285, 16777215))
-        self.addPayeOldStudentBtn.setFont(font5)
+        self.addPayeOldStudentBtn.setFont(font6)
         self.addPayeOldStudentBtn.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
@@ -913,7 +963,7 @@ class Ui_MainWindow(object):
         self.exportPDF_btn_2.setObjectName(u"exportPDF_btn_2")
         self.exportPDF_btn_2.setMinimumSize(QSize(200, 35))
         self.exportPDF_btn_2.setMaximumSize(QSize(285, 16777215))
-        self.exportPDF_btn_2.setFont(font5)
+        self.exportPDF_btn_2.setFont(font6)
         self.exportPDF_btn_2.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
@@ -930,7 +980,7 @@ class Ui_MainWindow(object):
         self.exportExcel_btn_2.setObjectName(u"exportExcel_btn_2")
         self.exportExcel_btn_2.setMinimumSize(QSize(200, 35))
         self.exportExcel_btn_2.setMaximumSize(QSize(285, 16777215))
-        self.exportExcel_btn_2.setFont(font5)
+        self.exportExcel_btn_2.setFont(font6)
         self.exportExcel_btn_2.setStyleSheet(u"QPushButton{\n"
 "color:white;\n"
 "border:none;\n"
@@ -955,7 +1005,7 @@ class Ui_MainWindow(object):
         self.label_23 = QLabel(self.page_4)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMaximumSize(QSize(70, 16777215))
-        self.label_23.setFont(font6)
+        self.label_23.setFont(font7)
 
         self.gridLayout_6.addWidget(self.label_23, 0, 0, 1, 1)
 
@@ -1070,57 +1120,144 @@ class Ui_MainWindow(object):
         self.label_11 = QLabel(self.page_5)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setGeometry(QRect(10, 0, 321, 31))
-        self.label_11.setFont(font4)
+        self.label_11.setFont(font5)
         self.stackedWidget.addWidget(self.page_5)
         self.page_6 = QWidget()
         self.page_6.setObjectName(u"page_6")
         self.label_12 = QLabel(self.page_6)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(0, 10, 331, 31))
-        self.label_12.setFont(font4)
+        self.label_12.setFont(font5)
         self.stackedWidget.addWidget(self.page_6)
         self.page_7 = QWidget()
         self.page_7.setObjectName(u"page_7")
         self.label_13 = QLabel(self.page_7)
         self.label_13.setObjectName(u"label_13")
         self.label_13.setGeometry(QRect(10, 0, 271, 31))
-        self.label_13.setFont(font4)
+        self.label_13.setFont(font5)
         self.stackedWidget.addWidget(self.page_7)
         self.page_8 = QWidget()
         self.page_8.setObjectName(u"page_8")
         self.label_14 = QLabel(self.page_8)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(0, 0, 321, 31))
-        self.label_14.setFont(font4)
+        self.label_14.setFont(font5)
         self.stackedWidget.addWidget(self.page_8)
         self.page_9 = QWidget()
         self.page_9.setObjectName(u"page_9")
         self.label_15 = QLabel(self.page_9)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setGeometry(QRect(10, 0, 271, 31))
-        self.label_15.setFont(font4)
+        self.label_15.setFont(font5)
         self.stackedWidget.addWidget(self.page_9)
         self.page_10 = QWidget()
         self.page_10.setObjectName(u"page_10")
         self.label_16 = QLabel(self.page_10)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(0, 10, 271, 31))
-        self.label_16.setFont(font4)
+        self.label_16.setFont(font5)
         self.stackedWidget.addWidget(self.page_10)
         self.page_11 = QWidget()
         self.page_11.setObjectName(u"page_11")
         self.label_17 = QLabel(self.page_11)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setGeometry(QRect(10, 0, 271, 31))
-        self.label_17.setFont(font4)
+        self.label_17.setFont(font5)
         self.stackedWidget.addWidget(self.page_11)
         self.page_12 = QWidget()
         self.page_12.setObjectName(u"page_12")
         self.label_18 = QLabel(self.page_12)
         self.label_18.setObjectName(u"label_18")
         self.label_18.setGeometry(QRect(10, 10, 271, 31))
-        self.label_18.setFont(font4)
+        self.label_18.setFont(font5)
+        self.layoutWidget = QWidget(self.page_12)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 70, 419, 41))
+        self.horizontalLayout_12 = QHBoxLayout(self.layoutWidget)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.gest_compte_pushButton = QPushButton(self.layoutWidget)
+        self.gest_compte_pushButton.setObjectName(u"gest_compte_pushButton")
+        self.gest_compte_pushButton.setMinimumSize(QSize(200, 35))
+        self.gest_compte_pushButton.setStyleSheet(u"QPushButton{\n"
+"color:white;\n"
+"border:none;\n"
+"border-radius:8px;\n"
+"font-size:15px;\n"
+"	background-color: rgb(61, 48, 162);\n"
+"font-weight:bold;\n"
+"}")
+
+        self.horizontalLayout_12.addWidget(self.gest_compte_pushButton)
+
+        self.uptade_compte_pushButton = QPushButton(self.layoutWidget)
+        self.uptade_compte_pushButton.setObjectName(u"uptade_compte_pushButton")
+        self.uptade_compte_pushButton.setMinimumSize(QSize(210, 35))
+        self.uptade_compte_pushButton.setStyleSheet(u"QPushButton{\n"
+"color:white;\n"
+"border:none;\n"
+"border-radius:8px;\n"
+"font-size:15px;\n"
+"	background-color: rgb(176, 94, 255);\n"
+"font-weight:bold;\n"
+"}")
+
+        self.horizontalLayout_12.addWidget(self.uptade_compte_pushButton)
+
         self.stackedWidget.addWidget(self.page_12)
+        self.page_13 = QWidget()
+        self.page_13.setObjectName(u"page_13")
+        self.verticalLayout_18 = QVBoxLayout(self.page_13)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.label_25 = QLabel(self.page_13)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setFont(font5)
+
+        self.verticalLayout_18.addWidget(self.label_25)
+
+        self.add_compte_pushButton = QPushButton(self.page_13)
+        self.add_compte_pushButton.setObjectName(u"add_compte_pushButton")
+        self.add_compte_pushButton.setMinimumSize(QSize(200, 35))
+        self.add_compte_pushButton.setStyleSheet(u"QPushButton{\n"
+"color:white;\n"
+"border:none;\n"
+"border-radius:8px;\n"
+"font-size:15px;\n"
+"	background-color: rgb(61, 48, 162);\n"
+"font-weight:bold;\n"
+"}")
+
+        self.verticalLayout_18.addWidget(self.add_compte_pushButton)
+
+        self.verticalSpacer_5 = QSpacerItem(20, 38, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_18.addItem(self.verticalSpacer_5)
+
+        self.compte_tableWidget = QTableWidget(self.page_13)
+        if (self.compte_tableWidget.columnCount() < 4):
+            self.compte_tableWidget.setColumnCount(4)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.compte_tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.compte_tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.compte_tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.compte_tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem25)
+        self.compte_tableWidget.setObjectName(u"compte_tableWidget")
+        self.compte_tableWidget.setMinimumSize(QSize(850, 550))
+        self.compte_tableWidget.setStyleSheet(u"QHeaderView:section{\n"
+"font-weight:bold;\n"
+"background-color:black;\n"
+"color:white;}")
+
+        self.verticalLayout_18.addWidget(self.compte_tableWidget)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 38, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_18.addItem(self.verticalSpacer_6)
+
+        self.stackedWidget.addWidget(self.page_13)
 
         self.gridLayout_7.addWidget(self.stackedWidget, 0, 0, 1, 1)
 
@@ -1152,7 +1289,7 @@ class Ui_MainWindow(object):
         self.menu_burger.toggled.connect(self.icon_text_widget.setHidden)
         self.menu_burger.toggled.connect(self.icon_only_widget.setVisible)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(11)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1169,7 +1306,7 @@ class Ui_MainWindow(object):
         self.settings1.setText("")
         self.signout1.setText("")
         self.label_2.setText("")
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"ZANISCHOOL", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"M.C. SCHOOL", None))
         self.dashboard2.setText("")
         self.institute2.setText("")
         self.students2.setText("")
@@ -1192,7 +1329,9 @@ class Ui_MainWindow(object):
         self.search_global_lineEdit.setText("")
         self.search_global_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Rechercher ici...", None))
         self.label_5.setText("")
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"Bienvenue sur Mon Compagnon Scolaire", None))
+        self.label_21.setText("")
+        self.label.setText("")
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Centre", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Informations Apprenants", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"Ceci est la page pour enregistrer les informations des apprenants", None))
@@ -1274,5 +1413,17 @@ class Ui_MainWindow(object):
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"Depenses", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Stats", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Param\u00e8tres", None))
+        self.gest_compte_pushButton.setText(QCoreApplication.translate("MainWindow", u"Gestion des comptes", None))
+        self.uptade_compte_pushButton.setText(QCoreApplication.translate("MainWindow", u"Mettre a jour mon compte", None))
+        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Gestions des comptes", None))
+        self.add_compte_pushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter un compte", None))
+        ___qtablewidgetitem22 = self.compte_tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Titulaire", None));
+        ___qtablewidgetitem23 = self.compte_tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Nom utilisateur", None));
+        ___qtablewidgetitem24 = self.compte_tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Role", None));
+        ___qtablewidgetitem25 = self.compte_tableWidget.horizontalHeaderItem(3)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Actions", None));
     # retranslateUi
 

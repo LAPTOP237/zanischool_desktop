@@ -248,41 +248,6 @@ selection-background-color: rgb(176, 94, 255);
             <bold>true</bold>
            </font>
           </property>
-          <item>
-           <property name="text">
-            <string>ESCO 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ESCO 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ATELIER 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ATELIER 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>COME 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>COME 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>COME 3</string>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>

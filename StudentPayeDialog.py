@@ -27,7 +27,7 @@ class Ui_Dialog(QDialog):
             StudentPayeDialog.setObjectName(u"StudentPayeDialog")
         self.resize(547, 584)
         icon = QIcon()
-        icon.addFile(u":/icons/logo_zanischool.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/logo_mc.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.setWindowIcon(icon)
         self.setStyleSheet(u"QDialog{\n"
 "background-color: rgb(255, 255, 255);\n"

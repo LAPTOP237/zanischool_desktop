@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'studentDialog.ui'
+## Form generated from reading UI file 'StudentDialog.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.7.2
 ##
@@ -24,11 +24,9 @@ class Ui_StudentDialog(QDialog):
     def setupUi(self, StudentDialog):
         if not StudentDialog.objectName():
             StudentDialog.setObjectName(u"StudentDialog")
-
-        
         self.resize(548, 584)
         icon = QIcon()
-        icon.addFile(u":/icons/logo_zanischool.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/logo_mc.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.setWindowIcon(icon)
         self.setStyleSheet(u"QDialog{\n"
 "background-color: rgb(255, 255, 255);\n"
@@ -160,13 +158,6 @@ class Ui_StudentDialog(QDialog):
         self.verticalLayout_4.addWidget(self.label_5)
 
         self.class_comboBox_2 = QComboBox(self.layoutWidget)
-        self.class_comboBox_2.addItem("")
-        self.class_comboBox_2.addItem("")
-        self.class_comboBox_2.addItem("")
-        self.class_comboBox_2.addItem("")
-        self.class_comboBox_2.addItem("")
-        self.class_comboBox_2.addItem("")
-        self.class_comboBox_2.addItem("")
         self.class_comboBox_2.setObjectName(u"class_comboBox_2")
         font4 = QFont()
         font4.setFamilies([u"Montserrat SemiBold"])
@@ -310,14 +301,6 @@ class Ui_StudentDialog(QDialog):
         self.gender_comboBox.setItemText(1, QCoreApplication.translate("StudentDialog", u"Masculin", None))
 
         self.label_5.setText(QCoreApplication.translate("StudentDialog", u"Option et Niveau", None))
-        # self.class_comboBox_2.setItemText(0, QCoreApplication.translate("StudentDialog", u"ESCO 1", None))
-        # self.class_comboBox_2.setItemText(1, QCoreApplication.translate("StudentDialog", u"ESCO 2", None))
-        # self.class_comboBox_2.setItemText(2, QCoreApplication.translate("StudentDialog", u"ATELIER 1", None))
-        # self.class_comboBox_2.setItemText(3, QCoreApplication.translate("StudentDialog", u"ATELIER 2", None))
-        # self.class_comboBox_2.setItemText(4, QCoreApplication.translate("StudentDialog", u"COME 1", None))
-        # self.class_comboBox_2.setItemText(5, QCoreApplication.translate("StudentDialog", u"COME 2", None))
-        # self.class_comboBox_2.setItemText(6, QCoreApplication.translate("StudentDialog", u"COME 3", None))
-
         self.label_6.setText(QCoreApplication.translate("StudentDialog", u"Date de naissance", None))
         self.label_7.setText(QCoreApplication.translate("StudentDialog", u"Lieu de naissance", None))
         self.label_8.setText(QCoreApplication.translate("StudentDialog", u"Email", None))
@@ -325,8 +308,4 @@ class Ui_StudentDialog(QDialog):
         self.saveStudentBtn.setText(QCoreApplication.translate("StudentDialog", u"Enregistrer", None))
         self.cancel_btn.setText(QCoreApplication.translate("StudentDialog", u"Annuler", None))
     # retranslateUi
-
-
-    # Connecter le bouton cancel_btn pour fermer le formulaire d'ajout d'apprenant
-    # self.cancel_btn.clicked.connect(self.reject)
 

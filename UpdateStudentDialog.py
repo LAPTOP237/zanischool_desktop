@@ -20,15 +20,44 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QDialog,
     QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 import resources_rc
 
-class Ui_UpdateStudent_Dialog(QDialog):
+class Ui_UpdateStudent_Dialog(object):
     def setupUi(self, UpdateStudent_Dialog):
         if not UpdateStudent_Dialog.objectName():
             UpdateStudent_Dialog.setObjectName(u"UpdateStudent_Dialog")
-        UpdateStudent_Dialog.resize(548, 584)
+        self.resize(548, 584)
         icon = QIcon()
         icon.addFile(u":/icons/logo_zanischool.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        UpdateStudent_Dialog.setWindowIcon(icon)
-        self.layoutWidget = QWidget(UpdateStudent_Dialog)
+        self.setWindowIcon(icon)
+        self.setStyleSheet(u"QDialog{\n"
+"background-color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border: 1px solid gray;\n"
+"border-radius: 5px;\n"
+"height:35px;\n"
+"padding-left:15px;\n"
+"}\n"
+"\n"
+"QDateEdit{\n"
+"border: 1px solid gray;\n"
+"border-radius: 5px;\n"
+"height:35px;\n"
+"padding-left:15px;\n"
+"color:white;\n"
+"background-color: rgb(61, 48, 162);\n"
+"}\n"
+"\n"
+"QComboBox{\n"
+"border: 1px solid gray;\n"
+"border-radius: 5px;\n"
+"height:35px;\n"
+"padding-left:15px;\n"
+"color:white;\n"
+"background-color: rgb(61, 48, 162);\n"
+"selection-background-color: rgb(176, 94, 255);\n"
+"}")
+        self.layoutWidget = QWidget(self)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(310, 530, 221, 42))
         self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget)
@@ -66,7 +95,7 @@ class Ui_UpdateStudent_Dialog(QDialog):
 
         self.horizontalLayout_2.addWidget(self.update_cancel_btn)
 
-        self.layoutWidget_2 = QWidget(UpdateStudent_Dialog)
+        self.layoutWidget_2 = QWidget(self)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
         self.layoutWidget_2.setGeometry(QRect(20, 70, 511, 455))
         self.verticalLayout_9 = QVBoxLayout(self.layoutWidget_2)
@@ -152,13 +181,6 @@ class Ui_UpdateStudent_Dialog(QDialog):
         self.verticalLayout_4.addWidget(self.label_5)
 
         self.update_class_comboBox_2 = QComboBox(self.layoutWidget_2)
-        self.update_class_comboBox_2.addItem("")
-        self.update_class_comboBox_2.addItem("")
-        self.update_class_comboBox_2.addItem("")
-        self.update_class_comboBox_2.addItem("")
-        self.update_class_comboBox_2.addItem("")
-        self.update_class_comboBox_2.addItem("")
-        self.update_class_comboBox_2.addItem("")
         self.update_class_comboBox_2.setObjectName(u"update_class_comboBox_2")
         font4 = QFont()
         font4.setFamilies([u"Montserrat SemiBold"])
@@ -248,12 +270,12 @@ class Ui_UpdateStudent_Dialog(QDialog):
 
         self.verticalLayout_9.addLayout(self.verticalLayout_8)
 
-        self.line = QFrame(UpdateStudent_Dialog)
+        self.line = QFrame(self)
         self.line.setObjectName(u"line")
         self.line.setGeometry(QRect(0, 40, 551, 20))
         self.line.setFrameShape(QFrame.Shape.HLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
-        self.label = QLabel(UpdateStudent_Dialog)
+        self.label = QLabel(self)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(40, 10, 331, 31))
         font5 = QFont()
@@ -264,13 +286,13 @@ class Ui_UpdateStudent_Dialog(QDialog):
         self.label.setFont(font5)
         self.label.setStyleSheet(u"color: rgb(61, 48, 162);")
 
-        self.retranslateUi(UpdateStudent_Dialog)
+        self.retranslateUi()
 
-        QMetaObject.connectSlotsByName(UpdateStudent_Dialog)
+        QMetaObject.connectSlotsByName(self)
     # setupUi
 
-    def retranslateUi(self, UpdateStudent_Dialog):
-        UpdateStudent_Dialog.setWindowTitle(QCoreApplication.translate("UpdateStudent_Dialog", u"Gestions de Apprenants", None))
+    def retranslateUi(self):
+        self.setWindowTitle(QCoreApplication.translate("UpdateStudent_Dialog", u"Gestions de Apprenants", None))
         self.updateStudentBtn.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Enregistrer", None))
         self.update_cancel_btn.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Annuler", None))
         self.label_2.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Nom", None))
@@ -280,14 +302,6 @@ class Ui_UpdateStudent_Dialog(QDialog):
         self.update_gender_comboBox.setItemText(1, QCoreApplication.translate("UpdateStudent_Dialog", u"Masculin", None))
 
         self.label_5.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Option et Niveau", None))
-        # self.update_class_comboBox_2.setItemText(0, QCoreApplication.translate("UpdateStudent_Dialog", u"ESCO 1", None))
-        # self.update_class_comboBox_2.setItemText(1, QCoreApplication.translate("UpdateStudent_Dialog", u"ESCO 2", None))
-        # self.update_class_comboBox_2.setItemText(2, QCoreApplication.translate("UpdateStudent_Dialog", u"ATELIER 1", None))
-        # self.update_class_comboBox_2.setItemText(3, QCoreApplication.translate("UpdateStudent_Dialog", u"ATELIER 2", None))
-        # self.update_class_comboBox_2.setItemText(4, QCoreApplication.translate("UpdateStudent_Dialog", u"COME 1", None))
-        # self.update_class_comboBox_2.setItemText(5, QCoreApplication.translate("UpdateStudent_Dialog", u"COME 2", None))
-        # self.update_class_comboBox_2.setItemText(6, QCoreApplication.translate("UpdateStudent_Dialog", u"COME 3", None))
-
         self.label_6.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Date de naissance", None))
         self.label_7.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Lieu de naissance", None))
         self.label_8.setText(QCoreApplication.translate("UpdateStudent_Dialog", u"Email", None))

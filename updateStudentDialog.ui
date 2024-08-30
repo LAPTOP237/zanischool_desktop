@@ -17,6 +17,37 @@
    <iconset resource="resources.qrc">
     <normaloff>:/icons/logo_zanischool.png</normaloff>:/icons/logo_zanischool.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+background-color: rgb(255, 255, 255);
+}
+
+QLineEdit{
+border: 1px solid gray;
+border-radius: 5px;
+height:35px;
+padding-left:15px;
+}
+
+QDateEdit{
+border: 1px solid gray;
+border-radius: 5px;
+height:35px;
+padding-left:15px;
+color:white;
+background-color: rgb(61, 48, 162);
+}
+
+QComboBox{
+border: 1px solid gray;
+border-radius: 5px;
+height:35px;
+padding-left:15px;
+color:white;
+background-color: rgb(61, 48, 162);
+selection-background-color: rgb(176, 94, 255);
+}</string>
+  </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -251,41 +282,6 @@ font-weight:bold;
             <bold>true</bold>
            </font>
           </property>
-          <item>
-           <property name="text">
-            <string>ESCO 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ESCO 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ATELIER 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ATELIER 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>COME 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>COME 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>COME 3</string>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>

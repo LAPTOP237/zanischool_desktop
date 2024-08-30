@@ -16,7 +16,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
     def __init__(self,user_role):
         super().__init__()
         self.setupUi(self)
-        self.setWindowTitle("ZANISCHOOL")
+        self.setWindowTitle("Mon Compagnon Scolaire")
         self.user_role = user_role
 
         initialize_db()  # Initialiser la base de données au lancement

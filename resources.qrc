@@ -1,5 +1,7 @@
 <RCC>
   <qresource>
+    <file>icons/logo_mc.png</file>
+    <file>icons/logo_mc2.png</file>
     <file>icons/dashboard.png</file>
     <file>icons/dashboard1.png</file>
     <file>icons/dashboard2.png</file>
