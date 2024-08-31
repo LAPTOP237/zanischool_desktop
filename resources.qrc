@@ -1,5 +1,9 @@
 <RCC>
   <qresource>
+    <file>icons/CFPSF  LOGO.png</file>
+    <file>icons/CFPSF  LOGO+.jpg</file>
+    <file>icons/CFPSF .jpg</file>
+    <file>icons/CFPSF .png</file>
     <file>icons/logo_mc.png</file>
     <file>icons/logo_mc2.png</file>
     <file>icons/dashboard.png</file>

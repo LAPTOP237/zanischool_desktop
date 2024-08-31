@@ -3,3 +3,4 @@ PyQt6
 fpdf
 pandas
 openpyxl
+PyPDF2

@@ -3,6 +3,8 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 import sqlite3
 
+from data.compte_management import hash_password
+
 db = 'zani_db.db'
 
 class LoginPage(QDialog):
@@ -99,19 +101,28 @@ class LoginPage(QDialog):
     def check_credentials(self):
         username = self.username_lineEdit.text()
         password = self.password_lineEdit.text()
-        
+        hashed_password = hash_password(password)
         conn = sqlite3.connect(db)
         cursor = conn.cursor()
-        cursor.execute("SELECT role FROM users WHERE username = ? AND password = ?", (username, password))
+        cursor.execute("SELECT role,id,titulaire,username FROM users WHERE username = ? AND password = ?", (username, hashed_password))
         result = cursor.fetchone()
         conn.close()
         
         if result:
-            self.user_role = result[0]  # Stocker le rôle de l'utilisateur
+            self.user_role = result[0]
+            self.user_id = result[1]
+            self.user_titulaire = result[2]
+            self.user_name = result[3]  # Stocker le rôle de l'utilisateur
             self.accept()  # Connexion réussie, fermer le dialogue
         else:
             QMessageBox.warning(self, "Erreur", "Nom d'utilisateur ou mot de passe incorrect.")
 
     def get_user_role(self):
         return self.user_role  # Méthode pour obtenir le rôle de l'utilisateur
+    
+    def get_user_id(self):
+        return self.user_id
+    
+    def get_user_name(self):
+        return self.user_name
 

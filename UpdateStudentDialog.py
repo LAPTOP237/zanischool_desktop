@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QDialog,
     QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 import resources_rc
 
-class Ui_UpdateStudent_Dialog(object):
+class Ui_UpdateStudent_Dialog(QDialog):
     def setupUi(self, UpdateStudent_Dialog):
         if not UpdateStudent_Dialog.objectName():
             UpdateStudent_Dialog.setObjectName(u"UpdateStudent_Dialog")

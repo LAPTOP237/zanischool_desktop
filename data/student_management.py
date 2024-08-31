@@ -93,64 +93,80 @@ def filter_students(gender_filter=None, class_filter=None):
     return rows
 
 def generate_matricule(sexe):
-    current_year = datetime.now().strftime("%Y")
-    prefix = 'F' if sexe == 'Féminin' else 'M'  # Utiliser 'M' pour Masculin
-    conn = sqlite3.connect(db)
-    cursor = conn.cursor()
-    
-    # Trouver le dernier matricule de l'année en cours
-    cursor.execute("SELECT matricule FROM students WHERE matricule LIKE ? ORDER BY matricule DESC LIMIT 1", (f"{current_year}{prefix}%",))
-    last_matricule = cursor.fetchone()
-    number = 1
-    if last_matricule:
-        last_number = int(last_matricule[0][6:])  # Extrait le numéro de l'ancien matricule
-        number = last_number + 1
+    """Génère un matricule unique pour un étudiant."""
+    try:
+        # Connexion à la base de données
+        conn = sqlite3.connect(db)
+        cursor = conn.cursor()
 
-    matricule = f"{current_year}{prefix}{number:05d}"
-    conn.close()
-    return matricule
+        current_year = datetime.now().strftime("%Y")
+        prefix = 'F' if sexe.lower() == 'féminin' else 'M'  # Détermine le préfixe en fonction du sexe
+        
+        # Trouver le dernier matricule de l'année en cours
+        cursor.execute("SELECT matricule FROM students WHERE matricule LIKE ? ORDER BY matricule DESC LIMIT 1", (f"{current_year}{prefix}%",))
+        last_matricule = cursor.fetchone()
+
+        number = 1
+        if last_matricule:
+            last_number = int(last_matricule[0][6:])  # Extrait le numéro de l'ancien matricule
+            number = last_number + 1
+
+        matricule = f"{current_year}{prefix}{number:05d}"
+        
+        return matricule
+
+    except sqlite3.Error as e:
+        # Gestion des erreurs SQLite
+        return f"Une erreur est survenue lors de la génération du matricule : {str(e)}"
+
+    except Exception as e:
+        # Gestion des autres exceptions
+        return f"Une erreur imprévue est survenue : {str(e)}"
+
+    finally:
+        # Assurez-vous que la connexion est toujours fermée
+        conn.close()
+
 def update_student(matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
     """Met à jour les informations d'un étudiant dans la base de données."""
-    conn = get_connection()
-    cursor = conn.cursor()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    # Générer un nouveau matricule si le sexe a changé
-    current_year = datetime.now().strftime("%Y")
-    prefix = 'F' if sexe == 'Féminin' else 'M'
-    new_matricule = f"{current_year}{prefix}{matricule[6:]}"
+        # Exécution de la requête SQL pour mettre à jour l'étudiant
+        cursor.execute('''
+            UPDATE students
+            SET
+                nom = ?,
+                prenom = ?,
+                sexe = ?,
+                option_et_niveau = ?,
+                date_naissance = ?,
+                lieu_naissance = ?,
+                email = ?,
+                contact = ?,
+                last_update = datetime('now')
+            WHERE matricule = ?
+        ''', (nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, matricule))
 
-    cursor.execute('''
-        UPDATE students
-        SET matricule = ?,
-            nom = ?,
-            prenom = ?,
-            sexe = ?,
-            option_et_niveau = ?,
-            date_naissance = ?,
-            lieu_naissance = ?,
-            email = ?,
-            contact = ?,
-            last_update = datetime('now')
-        WHERE matricule = ?
-    ''', (new_matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, matricule))
+        # Validation des modifications
+        conn.commit()
 
-    conn.commit()
-    conn.close()
+        # Vérifier si la mise à jour a eu un effet
+        if cursor.rowcount == 0:
+            return "Aucun étudiant trouvé avec ce matricule."
+
+        return "Les informations de l'étudiant ont été mises à jour avec succès."
+
+    except Exception as e:
+        # Gestion des exceptions et renvoi d'un message d'erreur
+        return f"Une erreur est survenue : {str(e)}"
+
+    finally:
+        # Assurez-vous que la connexion est toujours fermée
+        conn.close()
 
 
-# def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
-#     matricule = generate_matricule(sexe)
-    
-#     conn = sqlite3.connect(db)
-#     cursor = conn.cursor()
-    
-#     cursor.execute('''
-#         INSERT INTO students (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, created_at, last_update)
-#         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
-#     ''', (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact))
-    
-#     conn.commit()
-#     conn.close()
 
 
 def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
@@ -160,6 +176,19 @@ def save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu
         conn = sqlite3.connect(db)
         cursor = conn.cursor()
         
+        # Vérifier si un apprenant avec le même nom, prénom et date de naissance existe déjà
+        cursor.execute('''
+            SELECT * FROM students 
+            WHERE nom = ? AND prenom = ? AND date_naissance = ?
+        ''', (nom, prenom, date_naissance))
+        
+        existing_student = cursor.fetchone()
+        
+        if existing_student:
+            conn.close()
+            return False, "L'apprenant existe déjà avec le même nom, prénom et date de naissance."
+        
+        # Insertion du nouvel apprenant
         cursor.execute('''
             INSERT INTO students (matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact, created_at, last_update)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
@@ -254,107 +283,7 @@ def get_etude_id_by_matricule(matricule):
         conn.close()
         print("Aucun étudiant trouvé avec ce matricule.")
         return None
-    
 
-#Enregistrer le paiment d'un etudiant dans la bd
-# def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
-    
-#     conn = sqlite3.connect(db)
-#     cursor = conn.cursor()
-
-#     datedeb, datefin = parse_annee_scolaire(annee_scolaire)
-
-#      # Vérifier si l'année scolaire existe déjà, sinon la créer
-#     cursor.execute("""
-#         SELECT id_scolarite FROM annee_scolaire 
-#         WHERE debut = ? AND fin = ?
-#     """, (datedeb, datefin))
-#     annee_scolarite1 = cursor.fetchone()
-    
-#     if annee_scolarite1 is None:
-#         cursor.execute("""
-#             INSERT INTO annee_scolaire (debut, fin)
-#             VALUES (?, ?)
-#         """, (datedeb, datefin))
-#         annee_scolarite_id = cursor.lastrowid
-#     else:
-#         annee_scolarite_id = annee_scolarite1[0]
-   
-#    # Remplacer la virgule par un point pour les conversions
-#     montant_verse = montant_verse.replace(',', '.')
-    
-#     try:
-#         montant_verse = float(montant_verse)
-#     except ValueError:
-#         print("Erreur de conversion pour le montant versé.")
-#         return
-    
-#    # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
-#     cursor.execute("""
-#         SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
-#         FROM dossier d
-#         JOIN students s ON d.id_eleve = s.matricule
-#         JOIN etude e ON d.id_etude = e.id_etude
-#         LEFT JOIN recu r ON d.id_dossier = r.id_dossier
-#         WHERE s.matricule = ? AND d.id_scolarite = ?
-#     """, (matricule, annee_scolarite_id))
-    
-#     result = cursor.fetchone()
-    
-#     if not result:
-#         print("Dossier non trouvé.")
-#          # Créer le nouveau dossier
-#         cursor.execute("""
-#             INSERT INTO dossier (id_eleve, id_scolarite, id_etude)
-#             VALUES (?, ?, ?)
-#         """, (matricule, annee_scolarite_id, get_etude_id_by_matricule(matricule)))
-#         conn.commit()
-#         print("Nouveau dossier créé avec succès.")
-
-#       # Récupérer l'id_dossier correspondant à l'étudiant pour l'année scolaire donnée
-#         cursor.execute("""
-#         SELECT d.id_dossier, e.frais_scolaire, r.solde, s.nom, s.prenom, s.date_naissance, s.lieu_naissance, s.option_et_niveau
-#         FROM dossier d
-#         JOIN students s ON d.id_eleve = s.matricule
-#         JOIN etude e ON d.id_etude = e.id_etude
-#         LEFT JOIN recu r ON d.id_dossier = r.id_dossier
-#         WHERE s.matricule = ? AND d.id_scolarite = ?
-#     """, (matricule, annee_scolarite_id))
-    
-#         result = cursor.fetchone()
-
-#     id_dossier, frais_scolaire, solde, nom, prenom, date_naissance, lieu_naissance, option_et_niveau= result
-
-#     # Calculer le nouveau solde et le montant restant
-#     id_dossier1 = id_dossier
-#     cursor.execute("""
-#             SELECT montant_restant FROM recu WHERE id_dossier = ? ORDER BY id_recu DESC LIMIT 1;
-#         """, (id_dossier1,))
-#     result1 = cursor.fetchone()
-
-#     if result1 :
-#         montant_restant = result1[0]
-#         montant_restant = montant_restant - montant_verse
-#         nouveau_solde = frais_scolaire - montant_restant
-#     else:
-#         montant_restant = frais_scolaire - montant_verse
-#         nouveau_solde = frais_scolaire - montant_restant
-        
-
-#     # Insérer le nouveau reçu dans la base de données
-#     cursor.execute("""
-#         INSERT INTO recu (id_dossier, raison, montant_verse, montant_restant, solde, date_paye)
-#         VALUES (?, ?, ?, ?, ?, ?)
-#     """, (id_dossier, raison, montant_verse, montant_restant, nouveau_solde, date_paye))
-
-#     conn.commit()
-#     conn.close()
-
-#     # Générer le PDF du reçu après l'enregistrement
-#     generate_receipt_pdf(matricule, date_paye, annee_scolaire, nom, prenom, date_naissance, lieu_naissance, montant_verse, raison, montant_restant,option_et_niveau)
-
-
-#     print("Paiement enregistré avec succès.")
 
 def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scolaire):
     conn = sqlite3.connect(db)
@@ -438,17 +367,20 @@ def save_payement_to_db(matricule, raison, montant_verse, date_paye, annee_scola
             VALUES (?, ?, ?, ?, ?, ?)
         """, (id_dossier, raison, montant_verse, montant_restant, nouveau_solde, date_paye))
 
+        recu_id = cursor.lastrowid
+
         conn.commit()
 
         # Générer le PDF du reçu après l'enregistrement
-        generate_receipt_pdf(matricule, date_paye, annee_scolaire, nom, prenom, date_naissance, lieu_naissance, montant_verse, raison, montant_restant, option_et_niveau)
+        erreur = generate_receipt_pdf(matricule, date_paye, nom, prenom, date_naissance, lieu_naissance, montant_verse, raison, montant_restant, option_et_niveau, recu_id)
         
-        # Ouvrir le PDF généré pour impression
-        # pdf_path = os.path.join('Documents/Recus', f'{matricule}_{date_paye}.pdf')
-        # if os.path.isfile(pdf_path):
-        #     os.startfile(pdf_path, 'print')
         
-        return "Le paiement a été enregistré avec succès s'ouvrira automatiquement pour l'impression."
+        if erreur:
+            print(erreur)
+            return f"Paiment enregistré, mais une erreur lors de la generation du recu{erreur}"
+        else:
+            print("Paiement enregistré, Le reçu a été généré avec succès. Le pdf va s'ouvrir automatiquement...")
+            return "Paiement enregistré, Le reçu a été généré avec succès. Le pdf va s'ouvrir automatiquement..."
     
     except Exception as e:
         print(f"Erreur: {e}")

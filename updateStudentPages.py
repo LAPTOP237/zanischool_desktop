@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QMessageBox
-from PySide6.QtCore import QDate
+from PySide6.QtWidgets import QMessageBox,QProgressDialog
+from PySide6.QtCore import QDate, QTimer,Qt
 from UpdateStudentDialog import Ui_UpdateStudent_Dialog
 from data.student_management import update_student, get_all_etudes
 
@@ -52,15 +52,33 @@ class StudentUpdatePage(Ui_UpdateStudent_Dialog):
         if not all([nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance]):
             QMessageBox.warning(self, "Erreur", "Tous les champs doivent être remplis.")
             return
+        
+        # Afficher le dialogue de progression
+        progress_dialog = QProgressDialog("Enregistrement en cours...", None, 0, 0, self)
+        progress_dialog.setWindowTitle("Veuillez patienter")
+        progress_dialog.setWindowModality(Qt.WindowModal)
+        progress_dialog.setAutoClose(False)
+        progress_dialog.show()
+
+        # Démarrer un QTimer pour simuler une pause
+        QTimer.singleShot(1000, lambda: self.perform_student_update(progress_dialog, matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact))
+
+        self.accept()
 
         # Mettre à jour les données dans la base de données
-        update_student(matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact)
+    def perform_student_update(self,progress_dialog, matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact):
 
-        # Afficher un message de confirmation
-        QMessageBox.information(self, "Succès", "Les informations de l'apprenant ont été mises à jour avec succès.")
+        result = update_student(matricule, nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact)
 
-        # Fermer le dialogue
-        self.accept()
+        # Fermer le dialogue de progression
+        progress_dialog.close()
+
+        # Afficher le résultat
+        if result == "Les informations de l'étudiant ont été mises à jour avec succès.":
+            QMessageBox.information(self, "Succès", result)
+        else:
+            QMessageBox.critical(self, "erreur", result)
+            self.close()
 
     def cancel_update(self):
         """Annule la modification et ferme le formulaire."""

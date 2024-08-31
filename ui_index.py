@@ -548,8 +548,8 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addLayout(self.gridLayout, 0, 0, 1, 1)
 
-        self.gridLayout_5 = QGridLayout()
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.verticalLayout_20 = QVBoxLayout()
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.header_widget = QWidget(self.centralwidget)
         self.header_widget.setObjectName(u"header_widget")
         self.header_widget.setMinimumSize(QSize(0, 80))
@@ -559,6 +559,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(-1, 10, -1, -1)
+        self.label_26 = QLabel(self.header_widget)
+        self.label_26.setObjectName(u"label_26")
+        self.label_26.setMinimumSize(QSize(55, 47))
+        self.label_26.setMaximumSize(QSize(55, 16777215))
+        self.label_26.setPixmap(QPixmap(u":/icons/logo_mc.png"))
+        self.label_26.setScaledContents(True)
+
+        self.horizontalLayout_4.addWidget(self.label_26)
+
         self.menu_burger = QPushButton(self.header_widget)
         self.menu_burger.setObjectName(u"menu_burger")
         self.menu_burger.setStyleSheet(u"border:none;")
@@ -598,7 +607,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addLayout(self.horizontalLayout_4)
 
-        self.horizontalSpacer = QSpacerItem(333, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(200, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer)
 
@@ -607,6 +616,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setContentsMargins(-1, -1, 10, -1)
         self.search_global_lineEdit = QLineEdit(self.header_widget)
         self.search_global_lineEdit.setObjectName(u"search_global_lineEdit")
+        self.search_global_lineEdit.setMinimumSize(QSize(150, 0))
         self.search_global_lineEdit.setMaximumSize(QSize(16777215, 31))
         font3 = QFont()
         font3.setPointSize(9)
@@ -633,7 +643,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addLayout(self.horizontalLayout_3)
 
 
-        self.gridLayout_5.addWidget(self.header_widget, 0, 0, 1, 1)
+        self.verticalLayout_20.addWidget(self.header_widget)
 
         self.main_screen_widget = QWidget(self.centralwidget)
         self.main_screen_widget.setObjectName(u"main_screen_widget")
@@ -641,14 +651,14 @@ class Ui_MainWindow(object):
         self.main_screen_widget.setMaximumSize(QSize(16777215, 16777215))
         self.main_screen_widget.setStyleSheet(u"border-radius:3px;\n"
 "background-color: rgb(243, 243, 243);")
-        self.gridLayout_7 = QGridLayout(self.main_screen_widget)
-        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.gridLayout_2 = QGridLayout(self.main_screen_widget)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.stackedWidget = QStackedWidget(self.main_screen_widget)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.page = QWidget()
         self.page.setObjectName(u"page")
-        self.verticalLayout_16 = QVBoxLayout(self.page)
-        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalLayout_15 = QVBoxLayout(self.page)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.horizontalLayout_11 = QHBoxLayout()
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.label_24 = QLabel(self.page)
@@ -677,29 +687,30 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.addWidget(self.label_21)
 
 
-        self.verticalLayout_16.addLayout(self.horizontalLayout_11)
+        self.verticalLayout_15.addLayout(self.horizontalLayout_11)
 
-        self.verticalLayout_15 = QVBoxLayout()
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.gridLayout_9 = QGridLayout()
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.verticalSpacer_3 = QSpacerItem(20, 28, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_15.addItem(self.verticalSpacer_3)
+        self.gridLayout_9.addItem(self.verticalSpacer_3, 0, 0, 1, 1)
 
         self.label = QLabel(self.page)
         self.label.setObjectName(u"label")
-        self.label.setMinimumSize(QSize(850, 550))
-        self.label.setPixmap(QPixmap(u":/icons/logo_mc2.png"))
-        self.label.setScaledContents(False)
+        self.label.setMinimumSize(QSize(800, 400))
+        self.label.setMaximumSize(QSize(1500, 765))
+        self.label.setPixmap(QPixmap(u":/icons/CFPSF .jpg"))
+        self.label.setScaledContents(True)
         self.label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_15.addWidget(self.label)
+        self.gridLayout_9.addWidget(self.label, 1, 0, 1, 1)
 
         self.verticalSpacer_4 = QSpacerItem(20, 28, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_15.addItem(self.verticalSpacer_4)
+        self.gridLayout_9.addItem(self.verticalSpacer_4, 2, 0, 1, 1)
 
 
-        self.verticalLayout_16.addLayout(self.verticalLayout_15)
+        self.verticalLayout_15.addLayout(self.gridLayout_9)
 
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QWidget()
@@ -921,27 +932,30 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
-        self.verticalLayout_14 = QVBoxLayout(self.page_4)
+        self.verticalLayout_16 = QVBoxLayout(self.page_4)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalLayout_14 = QVBoxLayout()
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.gridLayout_2 = QGridLayout()
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label_10 = QLabel(self.page_4)
         self.label_10.setObjectName(u"label_10")
+        self.label_10.setMinimumSize(QSize(0, 26))
+        self.label_10.setMaximumSize(QSize(16777215, 26))
         self.label_10.setFont(font5)
 
-        self.gridLayout_2.addWidget(self.label_10, 0, 0, 1, 1)
+        self.verticalLayout_14.addWidget(self.label_10)
 
         self.label_20 = QLabel(self.page_4)
         self.label_20.setObjectName(u"label_20")
+        self.label_20.setMaximumSize(QSize(16777215, 30))
         self.label_20.setFont(font2)
 
-        self.gridLayout_2.addWidget(self.label_20, 1, 0, 1, 1)
+        self.verticalLayout_14.addWidget(self.label_20)
 
 
-        self.verticalLayout_14.addLayout(self.gridLayout_2)
+        self.verticalLayout_16.addLayout(self.verticalLayout_14)
 
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_13 = QHBoxLayout()
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.addPayeOldStudentBtn = QPushButton(self.page_4)
         self.addPayeOldStudentBtn.setObjectName(u"addPayeOldStudentBtn")
         self.addPayeOldStudentBtn.setMinimumSize(QSize(230, 35))
@@ -957,7 +971,7 @@ class Ui_MainWindow(object):
 "}")
         self.addPayeOldStudentBtn.setIcon(icon16)
 
-        self.horizontalLayout_6.addWidget(self.addPayeOldStudentBtn)
+        self.horizontalLayout_13.addWidget(self.addPayeOldStudentBtn)
 
         self.exportPDF_btn_2 = QPushButton(self.page_4)
         self.exportPDF_btn_2.setObjectName(u"exportPDF_btn_2")
@@ -974,7 +988,7 @@ class Ui_MainWindow(object):
 "}")
         self.exportPDF_btn_2.setIcon(icon17)
 
-        self.horizontalLayout_6.addWidget(self.exportPDF_btn_2)
+        self.horizontalLayout_13.addWidget(self.exportPDF_btn_2)
 
         self.exportExcel_btn_2 = QPushButton(self.page_4)
         self.exportExcel_btn_2.setObjectName(u"exportExcel_btn_2")
@@ -991,23 +1005,23 @@ class Ui_MainWindow(object):
 "}")
         self.exportExcel_btn_2.setIcon(icon18)
 
-        self.horizontalLayout_6.addWidget(self.exportExcel_btn_2)
+        self.horizontalLayout_13.addWidget(self.exportExcel_btn_2)
 
         self.horizontalSpacer_6 = QSpacerItem(178, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_6.addItem(self.horizontalSpacer_6)
+        self.horizontalLayout_13.addItem(self.horizontalSpacer_6)
 
 
-        self.verticalLayout_14.addLayout(self.horizontalLayout_6)
+        self.verticalLayout_16.addLayout(self.horizontalLayout_13)
 
-        self.gridLayout_6 = QGridLayout()
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.label_23 = QLabel(self.page_4)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMaximumSize(QSize(70, 16777215))
         self.label_23.setFont(font7)
 
-        self.gridLayout_6.addWidget(self.label_23, 0, 0, 1, 1)
+        self.horizontalLayout_6.addWidget(self.label_23)
 
         self.filterGender_comboBox_2 = QComboBox(self.page_4)
         self.filterGender_comboBox_2.addItem("")
@@ -1026,7 +1040,7 @@ class Ui_MainWindow(object):
 "font-weight:bold;\n"
 "}")
 
-        self.gridLayout_6.addWidget(self.filterGender_comboBox_2, 0, 1, 1, 1)
+        self.horizontalLayout_6.addWidget(self.filterGender_comboBox_2)
 
         self.filterClass_comboBox_2 = QComboBox(self.page_4)
         self.filterClass_comboBox_2.addItem("")
@@ -1043,7 +1057,7 @@ class Ui_MainWindow(object):
 "font-weight:bold;\n"
 "}")
 
-        self.gridLayout_6.addWidget(self.filterClass_comboBox_2, 0, 2, 1, 1)
+        self.horizontalLayout_6.addWidget(self.filterClass_comboBox_2)
 
         self.filterDate_dateEdit = QDateEdit(self.page_4)
         self.filterDate_dateEdit.setObjectName(u"filterDate_dateEdit")
@@ -1059,7 +1073,7 @@ class Ui_MainWindow(object):
 "font-weight:bold;\n"
 "}")
 
-        self.gridLayout_6.addWidget(self.filterDate_dateEdit, 0, 3, 1, 1)
+        self.horizontalLayout_6.addWidget(self.filterDate_dateEdit)
 
         self.searchStudent_lineEdit_2 = QLineEdit(self.page_4)
         self.searchStudent_lineEdit_2.setObjectName(u"searchStudent_lineEdit_2")
@@ -1073,10 +1087,10 @@ class Ui_MainWindow(object):
 "    \n"
 "}")
 
-        self.gridLayout_6.addWidget(self.searchStudent_lineEdit_2, 0, 4, 1, 1)
+        self.horizontalLayout_6.addWidget(self.searchStudent_lineEdit_2)
 
 
-        self.verticalLayout_14.addLayout(self.gridLayout_6)
+        self.verticalLayout_16.addLayout(self.horizontalLayout_6)
 
         self.tableWidget_2 = QTableWidget(self.page_4)
         if (self.tableWidget_2.columnCount() < 12):
@@ -1106,13 +1120,14 @@ class Ui_MainWindow(object):
         __qtablewidgetitem21 = QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(11, __qtablewidgetitem21)
         self.tableWidget_2.setObjectName(u"tableWidget_2")
-        self.tableWidget_2.setMinimumSize(QSize(500, 0))
+        self.tableWidget_2.setMinimumSize(QSize(500, 500))
+        self.tableWidget_2.setMaximumSize(QSize(16777215, 600))
         self.tableWidget_2.setStyleSheet(u"QHeaderView:section{\n"
 "font-weight:bold;\n"
 "background-color:black;\n"
 "color:white;}")
 
-        self.verticalLayout_14.addWidget(self.tableWidget_2)
+        self.verticalLayout_16.addWidget(self.tableWidget_2)
 
         self.stackedWidget.addWidget(self.page_4)
         self.page_5 = QWidget()
@@ -1259,13 +1274,13 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.addWidget(self.page_13)
 
-        self.gridLayout_7.addWidget(self.stackedWidget, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.stackedWidget, 0, 0, 1, 1)
 
 
-        self.gridLayout_5.addWidget(self.main_screen_widget, 1, 0, 1, 1)
+        self.verticalLayout_20.addWidget(self.main_screen_widget)
 
 
-        self.gridLayout_3.addLayout(self.gridLayout_5, 0, 1, 1, 1)
+        self.gridLayout_3.addLayout(self.verticalLayout_20, 0, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -1289,7 +1304,7 @@ class Ui_MainWindow(object):
         self.menu_burger.toggled.connect(self.icon_text_widget.setHidden)
         self.menu_burger.toggled.connect(self.icon_only_widget.setVisible)
 
-        self.stackedWidget.setCurrentIndex(11)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1323,8 +1338,9 @@ class Ui_MainWindow(object):
         self.business_overview.setText(QCoreApplication.translate("MainWindow", u"Stats", None))
         self.settings2.setText("")
         self.signout2.setText("")
+        self.label_26.setText("")
         self.menu_burger.setText("")
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Hello, ", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Centre de Formation Professionnel Sainte Famille", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Heureux de vous revoir!", None))
         self.search_global_lineEdit.setText("")
         self.search_global_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Rechercher ici...", None))
@@ -1343,7 +1359,7 @@ class Ui_MainWindow(object):
         self.filterGender_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"F\u00e9minin", None))
         self.filterGender_comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Masculin", None))
 
-        self.filterClass_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Selectionner le sexe", None))
+        self.filterClass_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Selectionner la classe", None))
 
         self.searchStudent_lineEdit.setText("")
         self.searchStudent_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Rechercher ici...", None))

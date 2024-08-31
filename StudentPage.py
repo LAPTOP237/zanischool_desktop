@@ -2,7 +2,6 @@ from PySide6.QtWidgets import QMessageBox,QProgressDialog
 from PySide6.QtCore import Qt,QTimer
 from StudentDialog import Ui_StudentDialog
 from data.student_management import save_student_to_db, get_all_etudes
-from data.database import initialize_db
 
 class StudentPage(Ui_StudentDialog):
     def __init__(self, parent=None):
@@ -11,24 +10,8 @@ class StudentPage(Ui_StudentDialog):
 
         self.saveStudentBtn.clicked.connect(self.validate_and_save)
         self.cancel_btn.clicked.connect(self.reject)
-        initialize_db()  # Initialiser la base de données au lancement
         self.load_combo_box_items() #Pour gerer les items de mon combox de mes classes
-        ## Créer l'indicateur de chargement
-        self.loading_dialog1 = QProgressDialog("Enregistrement en cours...", None, 0, 0, self)
-        self.loading_dialog1.setWindowTitle("Veuillez patienter")
-        self.loading_dialog1.setWindowModality(Qt.WindowModality.ApplicationModal)
-        self.loading_dialog1.setCancelButton(None)
-        self.loading_dialog1.setAutoClose(False)
-        self.loading_dialog1.setAutoReset(False)
-
-    def start_loading(self):
-        # Afficher l'indicateur de chargement
-        self.loading_dialog1.show()
-
-    def stop_loading(self):
-        # Masquer l'indicateur de chargement et réactiver le bouton
-        self.loading_dialog1.hide()
-        self.saveStudentBtn.setEnabled(True)
+        
 
     def load_combo_box_items(self):
         etudes = get_all_etudes()
@@ -39,16 +22,18 @@ class StudentPage(Ui_StudentDialog):
             self.class_comboBox_2.addItem(item_text)
            
     def validate_and_save(self):
-        self.start_loading()
-        self.saveStudentBtn.setEnabled(False)
+        
         if self.validate_fields():
-            # Arrêter l'indicateur de chargement
-            self.stop_loading()
-            QTimer.singleShot(100, self.save_student)  # Appeler save_payement après une courte pause 
+            # Afficher le dialogue de progression
+            progress_dialog = QProgressDialog("Enregistrement en cours...", None, 0, 0, self)
+            progress_dialog.setWindowTitle("Veuillez patienter")
+            progress_dialog.setWindowModality(Qt.WindowModal)
+            progress_dialog.setAutoClose(False)
+            progress_dialog.show()
+            # Démarrer un QTimer pour simuler une pause
+            QTimer.singleShot(1000, lambda: self.save_student(progress_dialog))
 
         else:
-            # Arrêter l'indicateur de chargement
-            self.stop_loading()
             self.show_error_message()
             
 
@@ -75,7 +60,7 @@ class StudentPage(Ui_StudentDialog):
         msg.exec()
 
 
-    def save_student(self):
+    def save_student(self, progress_dialog):
         # Récupérer les données du formulaire
         nom = self.name_lineEdit.text()
         prenom = self.name_lineEdit_2.text()
@@ -88,6 +73,8 @@ class StudentPage(Ui_StudentDialog):
 
         # Appeler la fonction pour sauvegarder les données dans la base de données
         success, result = save_student_to_db(nom, prenom, sexe, option_et_niveau, date_naissance, lieu_naissance, email, contact)
+
+        progress_dialog.close()
 
         if success:
             # Afficher un message de succès avec le nom et le matricule

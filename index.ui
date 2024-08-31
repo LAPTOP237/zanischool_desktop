@@ -935,8 +935,8 @@ border-radius:3px;
      </layout>
     </item>
     <item row="0" column="1">
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_20">
+      <item>
        <widget class="QWidget" name="header_widget" native="true">
         <property name="minimumSize">
          <size>
@@ -956,6 +956,31 @@ border-radius:3px;
            <property name="topMargin">
             <number>10</number>
            </property>
+           <item>
+            <widget class="QLabel" name="label_26">
+             <property name="minimumSize">
+              <size>
+               <width>55</width>
+               <height>47</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>55</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/icons/logo_mc.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QPushButton" name="menu_burger">
              <property name="styleSheet">
@@ -996,7 +1021,7 @@ border-radius:3px;
                 </font>
                </property>
                <property name="text">
-                <string>Hello, </string>
+                <string>Centre de Formation Professionnel Sainte Famille</string>
                </property>
               </widget>
              </item>
@@ -1023,7 +1048,7 @@ border-radius:3px;
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>333</width>
+             <width>200</width>
              <height>20</height>
             </size>
            </property>
@@ -1036,6 +1061,12 @@ border-radius:3px;
            </property>
            <item>
             <widget class="QLineEdit" name="search_global_lineEdit">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -1088,7 +1119,7 @@ border-radius:3px;
         </layout>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item>
        <widget class="QWidget" name="main_screen_widget" native="true">
         <property name="minimumSize">
          <size>
@@ -1106,14 +1137,14 @@ border-radius:3px;
          <string notr="true">border-radius:3px;
 background-color: rgb(243, 243, 243);</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_7">
+        <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>11</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="page">
-            <layout class="QVBoxLayout" name="verticalLayout_16">
+            <layout class="QVBoxLayout" name="verticalLayout_15">
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_11">
                <item>
@@ -1187,8 +1218,8 @@ background-color: rgb(243, 243, 243);</string>
               </layout>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_15">
-               <item>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="0">
                 <spacer name="verticalSpacer_3">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1201,29 +1232,35 @@ background-color: rgb(243, 243, 243);</string>
                  </property>
                 </spacer>
                </item>
-               <item>
+               <item row="1" column="0">
                 <widget class="QLabel" name="label">
                  <property name="minimumSize">
                   <size>
-                   <width>850</width>
-                   <height>550</height>
+                   <width>800</width>
+                   <height>400</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>1500</width>
+                   <height>765</height>
                   </size>
                  </property>
                  <property name="text">
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="resources.qrc">:/icons/logo_mc2.png</pixmap>
+                  <pixmap resource="resources.qrc">:/icons/CFPSF .jpg</pixmap>
                  </property>
                  <property name="scaledContents">
-                  <bool>false</bool>
+                  <bool>true</bool>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
-               <item>
+               <item row="2" column="0">
                 <spacer name="verticalSpacer_4">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1552,7 +1589,7 @@ font-weight:bold;
                    </property>
                    <item>
                     <property name="text">
-                     <string>Selectionner le sexe</string>
+                     <string>Selectionner la classe</string>
                     </property>
                    </item>
                   </widget>
@@ -1679,11 +1716,23 @@ color:white;}</string>
             </layout>
            </widget>
            <widget class="QWidget" name="page_4">
-            <layout class="QVBoxLayout" name="verticalLayout_14">
+            <layout class="QVBoxLayout" name="verticalLayout_16">
              <item>
-              <layout class="QGridLayout" name="gridLayout_2">
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_14">
+               <item>
                 <widget class="QLabel" name="label_10">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>26</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>26</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <family>Montserrat SemiBold</family>
@@ -1695,8 +1744,14 @@ color:white;}</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item>
                 <widget class="QLabel" name="label_20">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>30</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <family>Montserrat Medium</family>
@@ -1710,7 +1765,7 @@ color:white;}</string>
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
                <item>
                 <widget class="QPushButton" name="addPayeOldStudentBtn">
                  <property name="minimumSize">
@@ -1847,8 +1902,8 @@ font-weight:bold;
               </layout>
              </item>
              <item>
-              <layout class="QGridLayout" name="gridLayout_6">
-               <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
                 <widget class="QLabel" name="label_23">
                  <property name="maximumSize">
                   <size>
@@ -1868,7 +1923,7 @@ font-weight:bold;
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
+               <item>
                 <widget class="QComboBox" name="filterGender_comboBox_2">
                  <property name="maximumSize">
                   <size>
@@ -1905,7 +1960,7 @@ font-weight:bold;
                  </item>
                 </widget>
                </item>
-               <item row="0" column="2">
+               <item>
                 <widget class="QComboBox" name="filterClass_comboBox_2">
                  <property name="maximumSize">
                   <size>
@@ -1932,7 +1987,7 @@ font-weight:bold;
                  </item>
                 </widget>
                </item>
-               <item row="0" column="3">
+               <item>
                 <widget class="QDateEdit" name="filterDate_dateEdit">
                  <property name="minimumSize">
                   <size>
@@ -1954,7 +2009,7 @@ font-weight:bold;
                  </property>
                 </widget>
                </item>
-               <item row="0" column="4">
+               <item>
                 <widget class="QLineEdit" name="searchStudent_lineEdit_2">
                  <property name="minimumSize">
                   <size>
@@ -1997,7 +2052,13 @@ font-weight:bold;
                <property name="minimumSize">
                 <size>
                  <width>500</width>
-                 <height>0</height>
+                 <height>500</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>600</height>
                 </size>
                </property>
                <property name="styleSheet">

@@ -2,27 +2,37 @@ from PySide6.QtWidgets import QTableWidgetItem, QPushButton, QWidget, QMainWindo
 from PySide6.QtGui import QAction
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt, QDate
+from ComptePage import ComptePage
 from StudentPage import StudentPage
 from StudentPayePage import StudentPayePage
+from data.compte_management import get_users
 from ui_index import Ui_MainWindow
 from data.exportManager import ExportManager
 
 from data.student_management import get_all_students,get_all_etudes, delete_student, search_students, filter_students, initialize_db,get_student_by_matricule
 from data.payement_management import delete_payment, get_all_payments, get_payment_by_matricule, search_payments, filter_payments 
 
+from updateComptePage import UpdateComptePage
 from updateStudentPages import StudentUpdatePage
 
 class MySideBar(QMainWindow, Ui_MainWindow):
-    def __init__(self,user_role):
+    def __init__(self,user_role,user_name,user_id):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("Mon Compagnon Scolaire")
         self.user_role = user_role
+        self.user_id = user_id
+        self.user_name = user_name
 
         initialize_db()  # Initialiser la base de données au lancement
         self.load_students() # Chargement de la liste des etudiants
         self.load_payments()
+        self.load_comptes()
         # Configurez votre interface utilisateur ici
+        if self.user_role != 'admin':
+            self.gest_compte_pushButton.setHidden(True)
+
+        self.stackedWidget.setCurrentIndex(0)
         
         # Redimensionner les colonnes en fonction de leur contenu
         self.tableWidget.resizeColumnsToContents()
@@ -68,6 +78,8 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.settings1.clicked.connect(self.switch_to_settings_page)
         self.settings2.clicked.connect(self.switch_to_settings_page)
 
+        self.gest_compte_pushButton.clicked.connect(self.switch_to_settings_page_2)
+
         #Connecter les buttons a mon context menu 
         self.students1.clicked.connect(self.students_context_menu)
         self.teachers1.clicked.connect(self.teachers_context_menu)
@@ -77,6 +89,8 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.addStudentBtn.clicked.connect(self.open_student_dialog)
 
         self.addPayeOldStudentBtn.clicked.connect(self.open_student_payement_dialog)
+        self.add_compte_pushButton.clicked.connect(self.open_compte_dialog)
+        self.uptade_compte_pushButton.clicked.connect(self.open_change_password_dialog)
 
         #connecter mes buttons pour les filtres
         self.filterGender_comboBox.currentIndexChanged.connect(self.apply_filters)
@@ -154,6 +168,9 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
     def switch_to_settings_page(self):
         self.stackedWidget.setCurrentIndex(11)
+
+    def switch_to_settings_page_2(self):
+        self.stackedWidget.setCurrentIndex(12)
 
     #Methodes pour afficher la context menu de sidebar icon_only
     def students_context_menu(self):
@@ -259,8 +276,8 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
             # Désactiver les boutons de suppression et de modification pour les utilisateurs normaux
             if self.user_role != 'admin':
-               # delete_button.setEnabled(False)
-               # edit_button.setEnabled(False)
+               delete_button.setEnabled(False)
+               edit_button.setEnabled(False)
                pass
         
 
@@ -270,6 +287,17 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         if dialog.exec():
             self.load_students()  # Recharger les données après ajout
 
+    def open_compte_dialog(self):
+        # Ouvrir la boîte de dialogue 
+        dialog = ComptePage()
+        if dialog.exec():
+            self.load_comptes()  # Recharger les données après ajout
+
+    def open_change_password_dialog(self):
+        # Ouvrir la boîte de dialogue 
+        dialog = UpdateComptePage(self.user_id)
+        dialog.exec()
+        
     def open_student_payement_dialog(self):
         # Ouvrir la boîte de dialogue pour ajouter un nouvel étudiant
         dialog = StudentPayePage()
@@ -440,7 +468,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         delete_button.setStyleSheet("background-color: #FF4C4C; border-radius: 5px; color: white; margin-bottom:6px;")
         delete_button.setFixedSize(25, 25)
         
-        edit_button.clicked.connect(lambda checked, r=row_index: self.edit_payment(r))
+        edit_button.clicked.connect(lambda checked, r=row_index: self.fonction_encours(r))
         delete_button.clicked.connect(lambda checked, r=row_index: self.confirm_delete_payment(r))
         
         # Ajouter les boutons côte à côte dans la colonne Actions
@@ -455,7 +483,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.tableWidget_2.setCellWidget(row_index, 11, button_widget)  # Assurez-vous que l'index est correct
 
 
-    def edit_payment(self, row_index):
+    def fonction_encours(self, row_index):
         # if self.user_role == 'admin':
         #     matricule = self.tableWidget_2.item(row_index, 0).text()
         #     # Récupérer les données du paiement à partir de l'index de la ligne
@@ -535,3 +563,42 @@ class MySideBar(QMainWindow, Ui_MainWindow):
             # Ajouter des boutons d'action stylisés   
             self.add_payment_actions_buttons(row_index)
 
+
+    def load_comptes(self):
+        # Charge les données des paiements dans le tableau
+        payments = get_users()  # Implémentez cette fonction dans payement_management
+        self.compte_tableWidget.setRowCount(0)
+        for row_index, row in enumerate(payments):
+            self.compte_tableWidget.insertRow(row_index)
+            for col_index, item in enumerate(row):  # Inclure toutes les colonnes ici
+                self.compte_tableWidget.setItem(row_index, col_index, QTableWidgetItem(str(item)))
+            
+            # Ajouter des boutons d'action stylisés   
+            self.add_comptes_actions_buttons(row_index)
+
+    def add_comptes_actions_buttons(self, row_index):
+        # Ajouter des boutons d'action stylisés
+        edit_button = QPushButton()
+        delete_button = QPushButton()
+        
+        # Configurer les icônes et styles des boutons
+        edit_button.setIcon(QIcon("icons/icons8-edit-50.png"))
+        edit_button.setStyleSheet("background-color: #0077BD; border-radius: 5px; color: white; margin-bottom:6px;")
+        edit_button.setFixedSize(25, 25)
+        delete_button.setIcon(QIcon("icons/icons8-delete-50.png"))
+        delete_button.setStyleSheet("background-color: #FF4C4C; border-radius: 5px; color: white; margin-bottom:6px;")
+        delete_button.setFixedSize(25, 25)
+        
+        edit_button.clicked.connect(lambda checked, r=row_index: self.fonction_encours(r))
+        delete_button.clicked.connect(lambda checked, r=row_index: self.fonction_encours(r))
+        
+        # Ajouter les boutons côte à côte dans la colonne Actions
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(edit_button)
+        button_layout.addWidget(delete_button)
+        
+        # Créer un widget pour contenir les boutons
+        button_widget = QWidget()
+        button_widget.setLayout(button_layout)
+        
+        self.compte_tableWidget.setCellWidget(row_index, 3, button_widget)  # Assurez-vous que l'index est correct
